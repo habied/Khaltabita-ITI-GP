@@ -1,0 +1,203 @@
+<div class="container-fluid bg-dark text-light py-3">
+  <header class="text-center">
+    <h1 class="section-title ff-secondary text-start text-primary fw-normal">
+      CheckOut
+    </h1>
+  </header>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="bg-dark d-flex align-items-center my-5">
+        <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+          <form [formGroup]="AddressInfoForm">
+            <!-- <form novalidate [formGroup]="AddressInfoForm"> -->
+            <div class="row g-3">
+              <div class="col-md-12">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    formControlName="BuildingName"
+                    class="form-control"
+                    id="BuildingName"
+                    placeholder="Building name"
+                  />
+                  <label for="BuildingName">Building name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    formControlName="AptNo"
+                    class="form-control"
+                    id="AptNo"
+                    placeholder="Apt. no."
+                  />
+                  <label for="AptNo">Apt. no.</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    formControlName="floor"
+                    class="form-control datetimepicker-input"
+                    id="floor"
+                    placeholder="Floor (optional)"
+                    data-target="#date3"
+                    data-toggle="datetimepicker"
+                  />
+                  <label for="floor">Floor (optional)</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    formControlName="Street"
+                    class="form-control datetimepicker-input"
+                    id="Street"
+                    placeholder="Street"
+                    data-target="#date3"
+                    data-toggle="datetimepicker"
+                  />
+                  <label for="Street">Street</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    formControlName="City"
+                    class="form-control datetimepicker-input"
+                    id="City"
+                    placeholder="City"
+                    data-target="#date3"
+                    data-toggle="datetimepicker"
+                  />
+                  <label for="City">City</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div
+                  class="form-floating"
+                  id="phonenumber"
+                  data-target-input="nearest"
+                >
+                  <input
+                    type="text"
+                    formControlName="phonenumber"
+                    class="form-control datetimepicker-input"
+                    id="phonenumber"
+                    placeholder="Phone number"
+                    data-target="#date3"
+                    data-toggle="datetimepicker"
+                  />
+                  <label for="phonenumber">Phone number</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div
+                  class="form-floating"
+                  id="phonenumber"
+                  data-target-input="nearest"
+                >
+                  <input
+                    type="text"
+                    formControlName="MobileHome"
+                    class="form-control datetimepicker-input"
+                    id="MobileHome"
+                    placeholder="Mobile home (optional)"
+                    data-target="#date3"
+                    data-toggle="datetimepicker"
+                  />
+                  <label for="MobileHome">Mobile home (optional)</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <section class="container my-5 bg-dark text-light p-2">
+        <div class="row p-2" *ngFor="let item of order; let i = index">
+          <div class="col-6">
+            <div class="row">
+              <h4 class="ff-secondary text-start text-primary fw-normal">
+                {{ item.menuItem.name }}
+              </h4>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                EGP {{ item.qty * item.menuItem.unitPrice }}
+              </div>
+              <div class="col-6">
+                <button
+                  type="button"
+                  (click)="decreaseItemQuantity(i)"
+                  class="text-primary count"
+                >
+                  <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+                <span>{{ item.qty }}</span>
+                <button
+                  type="button"
+                  (click)="increaseItemQuantity(i)"
+                  class="text-primary count"
+                >
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <img class="img-fluid" [src]="item.menuItem.media" [alt]="item.menuItem.name" />
+          </div>
+          <div class="col-2">
+            <i class="fa fa-trash text-primary" aria-hidden="true" (click)="removeFromCart(item)"></i>
+          </div>
+        </div>
+      </section>
+      <section class="container my-5 bg-dark text-light p-2">
+        <div class="row p-2">
+          <h4 class="ff-secondary text-start text-primary fw-normal">
+            Payment summary
+          </h4>
+          <table class="m-3">
+            <tr>
+              <td>Subtotal</td>
+              <td>EGP {{ this.subtotal }}</td>
+            </tr>
+            <tr>
+              <td>Delivery fee</td>
+              <td>EGP {{ deliveryFee }}</td>
+            </tr>
+            <tr>
+              <td>Total amount</td>
+              <td>
+                EGP
+                {{ deliveryFee + subtotal }}
+              </td>
+            </tr>
+          </table>
+          <div class="m-3">
+            <button
+              class="btn btn-outline-primary p-3 m-3"
+              type="submit"
+              [routerLink]="['/chefs', chefId]"
+            >
+              Add items
+            </button>
+            <!-- [disabled]="AddressInfoForm.invalid" -->
+            <button class="btn btn-primary p-3 m-3" type="submit" (click)="openPopup()">
+
+              Checkout
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

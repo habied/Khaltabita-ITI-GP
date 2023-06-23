@@ -1,0 +1,14 @@
+.menu-item {
+  cursor: pointer;
+}
+.close-btn:hover {
+  color: var(--primary);
+}
+.like-button:hover {
+  color: var(--primary) !important;
+}
+@media (max-width: 424px) {
+  .price {
+    text-align: center;
+  }
+}

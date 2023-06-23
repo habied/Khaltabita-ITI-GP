@@ -1,0 +1,98 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark px-4 px-lg-5 py-3 py-lg-0 bg-dark"
+>
+  <a href="" class="navbar-brand p-0">
+    <h1
+      class=" ff-secondary text-start text-primary fw-normal"
+     
+    >
+      <i class="fa fa-utensils me-3 "></i>Khaltabita
+    </h1>
+
+    <!-- <img src="img/logo.png" alt="Logo"> -->
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarCollapse"
+  >
+    <span class="fa fa-bars"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto py-0 pe-4">
+      <a routerLink="home" routerLinkActive="active" class="nav-item nav-link"
+        >Home</a
+      >
+      <a
+        *ngIf="!isLoggedIn"
+        routerLink="login"
+        routerLinkActive="active"
+        class="nav-item nav-link"
+        >Login</a
+      >
+      <a routerLink="menu" routerLinkActive="active" class="nav-item nav-link"
+        >Menu</a
+      >
+      <a routerLink="chefs" routerLinkActive="active" class="nav-item nav-link"
+        >Chefs</a
+      >
+
+      <a
+        *ngIf="isChef"
+        routerLink="posts"
+        routerLinkActive="active"
+        class="nav-item nav-link"
+        >Posts</a
+      >
+      <a
+        *ngIf="isChef"
+        [routerLink]="['/profile', chefId]"
+        routerLinkActive="active"
+        class="nav-item nav-link"
+        >Profile</a
+      >
+
+      <!-- <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Dropdown
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+      </li> -->
+      <a
+        routerLink="cart"
+        routerLinkActive="active"
+        class="nav-item nav-link cart"
+        *ngIf="itemsNumber > 0 && !isChef"
+      >
+        <i class="fas fa-shopping-cart" style="font-size: 1.5rem"></i>
+        <div class="items-number">
+          {{ itemsNumber }}
+        </div>
+      </a>
+      <a (click)="logout()" *ngIf="isLoggedIn" class="nav-item nav-link"
+        >Logout</a
+      >
+    </div>
+    <a
+      *ngIf="!isChef"
+      routerLink="specialorder"
+      routerLinkActive=""
+      class="btn btn-primary py-2 px-4"
+      >Special Order</a
+    >
+  </div>
+</nav>

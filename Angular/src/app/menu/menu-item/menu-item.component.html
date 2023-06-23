@@ -1,0 +1,76 @@
+<div class="container-xxl bg-white p-0">
+  <!-- Spinner Start -->
+  <div
+    id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+  >
+    <div
+      class="spinner-border text-primary"
+      style="width: 3rem; height: 3rem"
+      role="status"
+    >
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!-- Spinner End -->
+  <!-- Menu Start -->
+  <ng-container *ngIf="menuItem">
+    <div class="container-xxl py-5">
+      <div class="container">
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+              <div class="row g-4">
+                <div class="d-flex align-items-center menu-item">
+                  <div class="img-container">
+                    <img
+                      class="flex-shrink-0 img-fluid rounded"
+                      src="{{ menuItem.media }}"
+                      alt=""
+                    />
+                  </div>
+                  <div
+                    class="d-flex flex-column text-start ps-4 justify-content-between item-details"
+                  >
+                    <div>
+                      <h5
+                        class="d-flex justify-content-between border-bottom pb-2"
+                      >
+                        <span>{{ menuItem.name }}</span>
+                        <span class="text-primary">{{ totalPrice }} EGP</span>
+                      </h5>
+                      <small class="fst-italic">{{
+                        menuItem.description
+                      }}</small>
+                    </div>
+                    <div class="qty-btns btn">
+                      <button (click)="removeOne()">-</button>
+                      {{ qty }}
+                      <button (click)="addOne()">+</button>
+                    </div>
+                    <div>
+                      <button class="btn btn-primary" (click)="addToCart()">
+                        Add to cart
+                      </button>
+                      <button
+                        class="btn btn-primary"
+                        [routerLink]="['/chefs', 1]"
+                      >
+                        Back to chef
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<!-- Menu End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+  ><i class="bi bi-arrow-up"></i
+></a>

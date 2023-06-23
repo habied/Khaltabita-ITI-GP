@@ -1,0 +1,35 @@
+<div class="container-xxl bg-white p-0">
+
+  <!-- Team Start -->
+  <div class="container-xxl pt-5 pb-3">
+    <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h5
+          class="section-title ff-secondary text-center text-primary fw-normal"
+        >
+          Team Members
+        </h5>
+        <h1 class="mb-5">Meet Our Chefs</h1>
+      </div>
+      <div class="row g-4">
+        <div
+          class="col-lg-3 col-md-6 wow fadeInUp"
+          data-wow-delay="0.3s"
+          *ngFor="let item of chefs"
+        >
+          <div class="team-item text-center rounded overflow-hidden" style="height: 20rem;">
+            <div class="overflow-hidden h-50">
+              <img class="img-fluid" src="{{ item.chefPhoto }}" alt="" />
+            </div>
+            <br />
+            <h5 class="mb-3">{{ item.chefName }}</h5>
+            <a [routerLink]="['/chefs', item.chefId]">details</a>
+            <br />
+            <small>{{ item.chefAddress }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Team End -->
+</div>

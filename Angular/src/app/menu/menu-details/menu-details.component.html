@@ -1,0 +1,196 @@
+<div class="container-xxl bg-white p-0">
+  <!-- Spinner Start -->
+  <!-- <div
+    id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+  >
+    <div
+      class="spinner-border text-primary"
+      style="width: 3rem; height: 3rem"
+      role="status"
+    >
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div> -->
+  <!-- Spinner End -->
+  <!-- Menu Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h5
+          class="section-title ff-secondary text-center text-primary fw-normal"
+        >
+          Food Menu
+        </h5>
+        <h1 class="mb-5">Most Popular Items</h1>
+      </div>
+      <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+        <ul
+          class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-3"
+        >
+          <li
+            class="nav-item"
+            *ngFor="let category of categories; let i = index"
+          >
+            <a
+              class="d-flex align-items-center text-start mx-3 ms-0 pb-3"
+              data-bs-toggle="pill"
+              [href]="'#tab-' + (i + 1)"
+              [ngClass]="i + 1 == 1 ? 'active' : ''"
+            >
+              <i class="fa fa-2x text-primary" [ngClass]="category.icon"></i>
+              <div class="ps-3">
+                <small class="text-body">{{ category.description }}</small>
+                <h6 class="mt-n1 mb-0">{{ category.text }}</h6>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div style="text-align: right; margin-bottom: 2rem">
+          <button
+            class="btn btn-primary"
+            *ngIf="userRole == 'Chef' && isSameChef()"
+            [routerLink]="['/menu/additem', routeChefId]"
+          >
+            New +
+          </button>
+        </div>
+        <div
+          class="tab-content"
+          *ngFor="let category of categories; let i = index"
+        >
+          <div
+            [id]="'tab-' + (i + 1)"
+            class="tab-pane fade show p-0"
+            [ngClass]="i + 1 == 1 ? 'active' : ''"
+          >
+            <div class="row g-4">
+              <ng-container *ngFor="let item of menuItems">
+                <div
+                  class="col-lg-6 menu-item"
+                  *ngIf="item.category == category.text"
+                  (click)="goToItem(item.chefId, item.id)"
+                >
+                  <div class="d-flex align-items-center">
+                    <img
+                      class="flex-shrink-0 img-fluid rounded"
+                      src="{{ item.media }}"
+                      alt=""
+                      style="width: 80px"
+                    />
+                    <div class="w-100 d-flex flex-column text-start ps-4">
+                      <h5
+                        class="d-flex justify-content-between border-bottom pb-2"
+                      >
+                        <span style="color: var(--primary)">{{
+                          item.name
+                        }}</span>
+                        <span class="text-primary price"
+                          >{{ item.unitPrice }} EGP</span
+                        >
+                      </h5>
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          gap: 0.5rem;
+                        "
+                      >
+                        <div
+                          style="
+                            display: flex;
+                            gap: 0.5rem;
+                            align-items: center;
+                          "
+                          *ngIf="userRole == 'Chef' && isSameChef()"
+                        >
+                          <button
+                            (click)="openModal($event, item)"
+                            style="background-color: transparent; border: none"
+                          >
+                            <i class="fas fa-trash text-danger"></i>
+                          </button>
+                          <a
+                            [routerLink]="[
+                              '/menu/edititem/',
+                              item.id,
+                              item.chefId
+                            ]"
+                            ><i class="fas fa-pen-to-square text-dark"></i
+                          ></a>
+                        </div>
+                        <div
+                          *ngIf="userRole !== 'Chef' && userId"
+                          style="font-size: 1.25rem; color: var(--dark)"
+                          class="like-button"
+                          (click)="addLike($event, item.id)"
+                          [ngStyle]="{
+                            color: isLiked(item.id)
+                              ? 'var(--primary)'
+                              : 'var(--dark)'
+                          }"
+                        >
+                          <i class="fa-sharp fa-solid fa-thumbs-up"></i
+                          >{{ item.likes }}
+                        </div>
+                        <small
+                          class="fst-italic"
+                          style="text-align: right; flex: 1; color: var(--dark)"
+                          >{{ item.description }}</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Delete {{ deletedItem?.name }} ?
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete {{ deletedItem?.name }} ?
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary bg-dark close-btn"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="deleteItem()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Menu End -->
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+    ><i class="bi bi-arrow-up"></i
+  ></a>
+</div>

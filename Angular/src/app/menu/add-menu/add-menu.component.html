@@ -1,0 +1,119 @@
+<div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+  <div class="row g-0">
+    <div class="col-md-12 bg-dark d-flex align-items-center">
+      <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+        <h1 class="section-title ff-secondary text-start text-primary fw-normal">Add MenuItem </h1>
+
+     
+
+<form [formGroup]="addMenuItemFrm"class="m-3" (ngSubmit)="addItem($event)">
+   <div class="mb-3">
+       <label for="pName" class="form-label">Product Name</label>
+       <input  type="text" formControlName="name" class="form-control" id="IName" name="itemMenuname" [class.is-invalid]="name?.invalid" [class.is-valid]="name?.valid">
+      
+     <div class="bg-warning"[hidden]="name?.valid || name?.untouched">
+        <small *ngIf="name?.errors?.['required']">
+        Product Name is required
+        </small>
+        <small *ngIf="name?.errors?.['pattern']">
+        Product name must be 3 letters at least, <b>{{name?.errors?.['pattern'].actualValue}}</b> doesn't match.
+        </small>
+    </div>
+      </div>
+
+     
+   <div class="mb-3">
+    <label for="pDesc" class="form-label">Product Description</label>
+    <textarea id="story" style="width: 350px;"placeholder='Please Enter your Product Description here...' formControlName="description" >
+   </textarea>
+
+<div class="bg-warning" [hidden]="description?.valid || description?.untouched">
+        <small *ngIf="description?.errors?.['pattern']">
+        Description should be between 3 and 200 letters, <b>{{description?.errors?.['pattern'].actualValue}}</b> doesn't match.
+          </small>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="pPrepTime" class="form-label">Preparation Time</label>
+        <input type="number"  style="width: 350px;"  placeholder='Please Enter Preparation time in minutes...'formControlName="prepTime" >
+      
+      <div class="bg-warning" [hidden]="prepTime?.valid || prepTime?.untouched">
+         <!-- <small *ngIf="prepTime?.errors?.['required']">
+          Preparation time is required
+         </small> -->
+         <small *ngIf="prepTime?.errors?.['min']">
+        Negative values are not allowed, <b>{{prepTime?.errors?.['min'].actualValue}}</b>doesn't match.
+         </small>
+     
+         <small *ngIf="prepTime?.errors?.['max']">
+          maximumm time is 300 minutes, <b>{{prepTime?.errors?.['max'].actualValue}}</b> doesn't match.
+           </small>
+        </div>
+       </div>
+
+   <div class="mb-3">
+     <label for="pPrice" class="form-label">Product Price</label>
+     <input type="text" formControlName="unitPrice" >
+    
+   
+   <div class="bg-warning" [hidden]="unitPrice?.valid || unitPrice?.untouched">
+    <small *ngIf="unitPrice?.errors?.['required']">
+    Price is required
+    </small>
+    <small *ngIf="unitPrice?.errors?.['min']">
+    minimum value is 10 L.E, <b>{{unitPrice?.errors?.['min'].actualValue}}</b> doesn't match.
+    </small>
+
+    <small *ngIf="unitPrice?.errors?.['max']">
+        maximumm value is 5000 L.E, <b>{{unitPrice?.errors?.['max'].actualValue}}</b> doesn't match.
+      </small>
+    </div>
+  </div>
+
+   <div class="mb-3">
+     <label for="prdCat" class="form-label">Product Category</label>
+     <select class="form-select" formControlName="category" >
+       <option value="breakfast">BreakFast</option> 
+       <option value="lunch">Lunch</option> 
+       <option value="dinner">Dinner</option> 
+   
+       </select>
+       </div>
+
+   <div class="mb-3">
+       <label for="pAvail" class="form-label">Availability</label>
+       <select class="form-select" formControlName="availability" >
+       <option value="yes">Yes</option> 
+       <option value="no">No</option>
+
+       </select>
+    
+  </div>
+  
+   <!-- <div class="mb-3">
+     <label for="pImg" class="form-label">Product Image</label>
+     <input type="file"formControlName="media" >
+
+   </div> -->
+
+<div class="mb-3">
+     <label for="pImg" class="form-label">Product Image</label>
+     <input type="file" (change)="uploadPhoto($event)">
+   <img [src]="imageUrl"/>
+
+  </div>
+   <button [disabled]="addMenuItemFrm.invalid" type="submit" class="btn btn-success">Submit</button>
+   <button class="btn btn-danger m-3" type="button" (click)="resetForm()">Reset</button>
+   <button class="btn btn-primary m-3" type="button"(click)="onBack()" style="float: right;">Back</button> 
+ </form> 
+
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- {{addMenuItemFrm.value|json}} -->
+
+

@@ -1,0 +1,237 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marhey:wght@300&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <div class="container-fluid d-flex justify-content-center">
+    <div class="col-md-6 mx-auto">
+      <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+        <h5
+          class="section-title ff-secondary text-start text-primary fw-normal"
+        >
+          Customize it now!
+        </h5>
+        <h1 class="text-blue mb-4" style="font-family: Marhey">
+          نفسك تاكل ايه انهاردة؟
+        </h1>
+        <form [formGroup]=" PostForm">
+
+          <div class="row g-3">
+            <div class="col-7">
+              <div class="form-floating">
+                <input
+                  class="form-control"
+                  placeholder="Special Request"
+                  id="message"
+                  formControlName="OrderItem"
+                >
+                <div *ngIf="PostForm.get('OrderItem')?.invalid && PostForm.get('OrderItem')?.touched">
+                  <small class="text-muted" *ngIf="PostForm.get('OrderItem')?.errors?.['required']">
+                    Item is required.
+                  </small>
+                  <small class="text-muted" *ngIf="PostForm.get('OrderItem')?.errors?.['pattern']">
+                    Item must be written in Arabic or English.
+                  </small>
+                  </div>
+                <label for="message">Your Order Item</label>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Your Quantity"
+                  formControlName="Quantity"
+                />
+                <div *ngIf="PostForm.get('Quantity')?.invalid && PostForm.get('Quantity')?.touched">
+                  <small class="text-muted" *ngIf="PostForm.get('Quantity')?.errors?.['required']">
+                    Quantity is required.
+                  </small>
+                  <small class="text-muted" *ngIf="PostForm.get('Quantity')?.errors?.['pattern']">
+                    Quantity must be a number.
+                  </small>
+                  </div>
+                <label for="text"
+                  >Quantity</label
+                >
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="form-floating">
+                <select
+                  class="form-select"
+                  id="select1"
+                  formControlName="QuantityUnit"
+                >
+                  <option>Kg</option>
+                  <option>Litre</option>
+                  <option>Count</option>
+                </select>
+                <label for="select1">Quantity Unit</label>
+              </div>
+            </div>
+
+            <div
+              class="col-md-4 d-flex align-items-center justify-content-center"
+              style="position: relative"
+            >
+              <p
+                class="text-center"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
+                "
+              >
+                Price Range(EGP)
+              </p>
+            </div>
+
+
+
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="FromPrice"
+                  placeholder="From"
+                  formControlName="priceFrom"
+                />
+                <div *ngIf="PostForm.get('priceFrom')?.invalid && PostForm.get('priceFrom')?.touched">
+                  <small class="text-muted" *ngIf="PostForm.get('priceFrom')?.errors?.['required']">
+                    Price is required.
+                  </small>
+                  <small class="text-muted" *ngIf="PostForm.get('priceFrom')?.errors?.['pattern']">
+                    Price must be a number.
+                  </small>
+                  </div>
+                <label for="FromPrice">From</label>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ToPrice"
+                  placeholder="To"
+                  formControlName="priceTo"
+                />
+                <div *ngIf="PostForm.get('priceTo')?.invalid && PostForm.get('priceTo')?.touched">
+                  <small class="text-muted" *ngIf="PostForm.get('priceTo')?.errors?.['required']">
+                    Price is required.
+                  </small>
+                  <small class="text-muted" *ngIf="PostForm.get('priceTo')?.errors?.['pattern']">
+                    Price must be a number.
+                  </small>
+                  </div>
+                <label for="ToPrice">To</label>
+              </div>
+            </div>
+
+
+            <div
+            class="col-md-4 d-flex align-items-center justify-content-center"
+            style="position: relative"
+          >
+            <p
+              class="text-center"
+              style="
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+              "
+            >
+              Order Delivery time
+            </p>
+          </div>
+
+            <!-- <div class="col-md-4">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="**Time start counting from accepting proposal"
+                  formControlName="PrepTime"
+                />
+                <div *ngIf="PostForm.get('PrepTime')?.invalid && PostForm.get('PrepTime')?.touched">
+                  <small class="text-muted" *ngIf="PostForm.get('PrepTime')?.errors?.['required']">
+                    Time is required.
+                  </small>
+                  <small class="text-muted" *ngIf="PostForm.get('PrepTime')?.errors?.['pattern']">
+                    Time must be a number.
+                  </small>
+                  </div>
+                <label for="text">Ex. 3Hrs, 50Min, 1days</label>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-floating">
+                <select
+                  class="form-select"
+                  formControlName="PrepTimeUnit"
+                >
+                  <option>Min</option>
+                  <option>Hrs</option>
+                  <option>Days</option>
+                </select>
+                <label for="select1">Time Unit</label>
+              </div>
+            </div> -->
+
+            <div class="col-md-8">
+              <div class="form-floating">
+                <input type="datetime-local" formControlName="PrepTime" id="datetime" name="datetime" class="form-control col-8">
+                <div *ngIf="PostForm.get('PrepTime')?.invalid && PostForm.get('PrepTime')?.touched">
+                  <small class="text-muted" *ngIf="PostForm.get('PrepTime')?.errors?.['required']">
+                    Time is required.
+                  </small>
+                  <small class="text-muted" *ngIf="PostForm.get('PrepTime')?.errors?.['futureDate']">
+                    Delivery date must be in the future.
+                  </small>
+                  </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-12">
+              <input type="file" class="form-control" id="customFile" />
+            </div> -->
+
+
+            <div class="col-8">
+              <button
+                class="btn btn-primary w-100 py-3"
+                type="button"
+                (click)="AddItem()"
+                [disabled]="PostForm.invalid"
+              >
+                Otlob!
+              </button>
+            </div>
+            <div class="col-4">
+              <button
+                class="btn btn-success w-100 py-3"
+                type="button"
+              >
+                Add Item
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>

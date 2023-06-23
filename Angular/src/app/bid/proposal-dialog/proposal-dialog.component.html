@@ -1,0 +1,123 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marhey:wght@300&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body class="BodyWidth">
+  <div class="d-flex justify-content-center">
+    <div class="col-md-12 mx-auto">
+      <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+        <h5
+          class="section-title ff-secondary text-start text-primary fw-normal mb-3"
+        >
+          Add a Proposal!
+        </h5>
+
+                <form [formGroup]="ProposalForm">
+                  <div class="row g-3">
+
+                    <div
+                      class="col-md-4 d-flex align-items-center justify-content-center"
+                      style="position: relative"
+                    >
+                      <p
+                        class="text-center"
+                        style="
+                          position: absolute;
+                          top: 50%;
+                          transform: translateY(-50%);
+                        "
+                      >
+                        Total Order Price
+                      </p>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="Price"
+                          placeholder="From"
+                          formControlName="TotalPrice"
+                        />
+                        <label for="Price">EGP</label>
+                        <div *ngIf="ProposalForm.get('TotalPrice')?.invalid && ProposalForm.get('TotalPrice')?.touched">
+                          <small class="text-muted" *ngIf="ProposalForm.get('TotalPrice')?.errors?.['required']">
+                            Final Price is required.
+                          </small>
+                          <small class="text-muted" *ngIf="ProposalForm.get('TotalPrice')?.errors?.['pattern']">
+                            Price must be between Price ranges added by user.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div
+                      class="col-md-4 d-flex align-items-center justify-content-center"
+                      style="position: relative"
+                    >
+                    <p
+                    class="text-center"
+                    style="
+                      position: absolute;
+                      top: 50%;
+                      transform: translateY(-50%);
+                    "
+                  >
+                    Delivery Time
+                  </p>
+                  </div>
+                    <div class="col-md-8">
+                      <div class="form-floating">
+                      <div class="form-group">
+                        <input type="datetime-local" formControlName="DeliveryTime" id="datetime" name="datetime" class="form-control col-8">
+                        <div *ngIf="ProposalForm.get('DeliveryTime')?.invalid && (ProposalForm.get('DeliveryTime')?.dirty || ProposalForm.get('DeliveryTime')?.touched)">
+                          <small class="text-muted" *ngIf="ProposalForm.get('DeliveryTime')?.errors?.['required']">
+                            Delivery date is required.
+                          </small>
+                          <small class="text-muted" *ngIf="ProposalForm.get('DeliveryTime')?.errors?.['futureDate']">
+                            Delivery date must be in the future.
+                          </small>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Special Request"
+                          id="message"
+                          style="height: 100px"
+                          formControlName="AdditionalInfo"
+                        ></textarea>
+                        <label for="message">Additional Info</label>
+                      </div>
+                    </div>
+
+
+                    <div class="col-12">
+                      <input type="file" class="form-control" formControlName="ChooseImg" id="customFile" />
+                    </div>
+          </div>
+            </form>
+      <div class="row">
+            <div class="col-6 mr-1 mt-4">
+              <button class="btn btn-outline-danger w-100 py-3" [disabled]="ProposalForm.invalid" (click)="AddProposal()">Confirm</button>
+            </div >
+          <div class="col-6 ml-1 mt-4">
+              <button class="btn btn-success w-100 py-3" type="button" (click)="CloseDialog()">
+                Cancel
+              </button>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

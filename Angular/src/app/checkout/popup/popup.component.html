@@ -1,0 +1,23 @@
+<!-- popup div  -->
+<div class="popup p-2">
+    <button mat-icon-button style="float: right; margin: 5px;" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-dialog-content align="center">
+      <p><span class="ff-secondary text-start text-primary fw-normal">Hint:</span> If you confirmed you can't change your order.</p>
+      <p>Are you sure to confirm?</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button 
+    class="btn btn-primary p-3 m-3"
+    type="submit"
+    (click)="AddOrder()"
+    >
+    Confirm
+    </button>
+    <button class="btn btn-outline-primary p-3 m-3" type="submit" matDialogClose>
+      Cancel
+    </button>
+    </mat-dialog-actions>
+    
+  </div>

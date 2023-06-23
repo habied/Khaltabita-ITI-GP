@@ -1,0 +1,26 @@
+.cart {
+  position: relative;
+}
+.items-number {
+  position: absolute;
+  bottom: calc(35px + -7px);
+  left: calc(8px + -7px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px;
+  background-color: #dc3545;
+}
