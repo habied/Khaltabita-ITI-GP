@@ -159,11 +159,12 @@
               <div class="col-12 align-items-center mt-5">
                 <button class="btn btn-primary w-25 text-center py-3 align-items-center" type="submit">Register Now</button>
               </div> -->
-              <form class="needs-validation align-items-center" (submit)="registerUser()" novalidate>
+              <form #myForm="ngForm" class="needs-validation align-items-center" (ngSubmit)="registerUser()" novalidate>
+                <!-- #myForm="ngForm" (ngSubmit)="onSubmit()" -->
                 <div class="row g-3 py-4">
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="name" placeholder="Your Name" required [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}">
+                      <input type="text" class="form-control" id="name" placeholder="Your Name"  required [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}">
                       <label for="name">Your Name</label>
                       <span *ngIf="!user.name || user.name.trim() === ''" >
                       
@@ -173,7 +174,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <input type="email" class="form-control" id="email" placeholder="Your Email" required [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+                      <input type="email" class="form-control" id="email" placeholder="Your Email"  required [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
                       <label for="email">Your Email</label>
                       <span  *ngIf="!user.email || !isValidEmail(user.email)">
                         Please provide a valid email address.
@@ -182,7 +183,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating" id="phonenumber" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" id="phonenumber" [(ngModel)]="user.mobile" [ngModelOptions]="{standalone: true}" required>
+                      <input type="text" class="form-control datetimepicker-input" id="phonenumber" [(ngModel)]="user.mobile" [ngModelOptions]="{standalone: true}"  required>
                       <label for="phonenumber">Phone number</label>
                       <span  *ngIf="!isValidPhoneNumber(user.mobile)">
                         Please provide a valid phone number with 11 digits.
@@ -191,7 +192,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating">
-                      <select class="form-select" id="select1" [(ngModel)]="user.gender" [ngModelOptions]="{standalone: true}" required>
+                      <select class="form-select" id="select1" [(ngModel)]="user.gender" [ngModelOptions]="{standalone: true}"  required>
                         <option value="">Choose...</option>
                         <option value="F">Female</option>
                         <option value="M">Male</option>
@@ -204,7 +205,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-floating" id="Password" data-target-input="nearest">
-                      <input type="password" class="form-control datetimepicker-input" id="Password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" required>
+                      <input type="password" class="form-control datetimepicker-input" id="Password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}"  required>
                       <label for="Password">Password</label>
                       <span  *ngIf="!isValidPassword(user.password)">
                         Please provide a valid password with at least 6 characters, one uppercase letter, one lowercase letter, and one digit.
@@ -213,7 +214,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-floating" id="confirmPassword" data-target-input="nearest" required>
+                    <div class="form-floating" id="confirmPassword" data-target-input="nearest"  >
                       <input type="password" class="form-control datetimepicker-input" id="confirmPassword" [(ngModel)]="user.confirmPassword" [ngModelOptions]="{standalone: true}" required>
                       <label for="confirmPassword">Confirm your Password</label>
                       <span  *ngIf="!isValidConfirmPassword(user.password, user.confirmPassword)">
@@ -224,7 +225,7 @@
                   </div>
                   <div class="col-12">
                     <div class="form-floating">
-                      <input class="form-control" placeholder="Address" id="message" style="height: 100px" required [(ngModel)]="user.address" [ngModelOptions]="{standalone: true}">
+                      <input class="form-control" placeholder="Address" id="message" style="height: 100px"  required [(ngModel)]="user.address" [ngModelOptions]="{standalone: true}">
                       <label for="message">Address</label>
                       <span  *ngIf="!user.address || user.address.trim() === ''">
                         Please provide a valid address.
@@ -241,7 +242,8 @@
                     
                   </div>
                   <div class="col-12 align-items-center mt-5">
-                    <button class="btn btn-primary w-25 text-center py-3 align-items-center" type="submit">Register Now</button>
+                    <button class="btn btn-primary w-25 text-center py-3 align-items-center"  *ngIf="registerEnable()" type="submit" >Register Now</button>
+                    <button class="btn btn-primary w-25 text-center py-3 align-items-center"  *ngIf="!registerEnable()" type="submit" disabled = true >Register Now</button>
                   </div> 
                 </div>
-              </form>
+              <!-- </form>*ngIf="registerEnable()" -->
