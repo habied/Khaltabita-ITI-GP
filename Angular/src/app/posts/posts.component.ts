@@ -34,7 +34,12 @@ else{
   }
 
   ViewPost(postid:Number){
-    this.router.navigateByUrl(`specialorder/post/${postid}`)
+    if(localStorage.getItem('title')=='NormalUser'){
+    this.router.navigateByUrl(`specialorder/post/${postid}`);
+    }
+    else{
+      this.router.navigateByUrl(`specialorder/proposal/${postid}`);
+    }
   }
 
 ngOnDestroy(): void {
