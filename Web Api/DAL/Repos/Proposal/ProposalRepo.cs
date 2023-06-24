@@ -28,7 +28,11 @@ namespace DAL
         {
             return FoodyContext.Set<Proposal>().Where(x => x.Id == id).FirstOrDefault();
         }
-
+        public void DeleteProposal(int id)
+        {
+            Proposal proposal=FoodyContext.Set<Proposal>().Where(x=>x.Id == id).FirstOrDefault();
+            FoodyContext.Remove(proposal);
+        }
         public int SaveChanges()
         {
             return FoodyContext.SaveChanges();

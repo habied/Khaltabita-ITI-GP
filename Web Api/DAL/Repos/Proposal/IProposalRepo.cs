@@ -11,6 +11,7 @@ namespace DAL
     {
         void AddProposal(Proposal NewProposal);
         Proposal GetProposalById(int id);
+        void DeleteProposal(int id);
         int SaveChanges();
     }
 }

@@ -18,7 +18,7 @@ namespace BL.Dtos.Post
 
         public int Quantity { get; set; }
 
-        public DateTime PreparationTime_min { get; set; }
+        public DateTime prepTime { get; set; }
 
         public string? AdditionalInfo { get; set; }
 
