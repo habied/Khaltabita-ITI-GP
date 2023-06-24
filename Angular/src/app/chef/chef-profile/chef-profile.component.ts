@@ -34,6 +34,7 @@ export class ChefProfileComponent implements OnDestroy,OnInit{
     ){}
     
   ngOnInit(){
+    window.scrollTo(0, 0);
     this.authService.isUser$.subscribe((value)=>(this.isUser=value));
     this.intializeVariables();  
   }
