@@ -4,8 +4,7 @@ import { Checkout } from '../_models/checkout/checkout';
 import { MenuService } from '../services/menu.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItemOrder } from '../_models/menu/item-order';
-import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from './popup/popup.component';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -17,9 +16,13 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder,
     private menuService: MenuService,
     private checkoutService: CheckoutService,
-
-    private popup: MatDialog
-  ) {
+  ) {}
+  
+  ngOnInit(): void {
+    this.order = [...this.menuService.orders];
+    this.calculateSubtotal();
+    this.chefId = this.order[0]?.menuItem.chefId;
+    
     this.AddressInfoForm = this.fb.group({
       BuildingName: [
         '',
@@ -31,7 +34,7 @@ export class CheckoutComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('[A-Za-zء-ي_ ,]{3,}')],
       ],
-      City: [
+      City: [ 
         '',
         [Validators.required, Validators.pattern('[A-Za-zء-ي_ ,]{3,}')],
       ],
@@ -54,17 +57,15 @@ export class CheckoutComponent implements OnInit {
       ],
     });
   }
-  ngOnInit(): void {
-    this.order = [...this.menuService.orders];
-    this.calculateSubtotal();
-    this.chefId = this.order[0]?.menuItem.chefId;
-  }
   order: ItemOrder[] = [];
   deliveryFee: number = 20;
   quantity: number = 1;
   subtotal: number = 0;
   chefId: string = '';
   finalOrder: Checkout | null = null;
+  nMeal:Checkout=new Checkout();
+  cartMenuItem:any={};
+
   increaseItemQuantity(menuItemIndex: number) {
     ++this.order[menuItemIndex].qty;
     this.menuService.itemsNumber$.next(this.menuService.itemsNumber$.value + 1);
@@ -81,6 +82,7 @@ export class CheckoutComponent implements OnInit {
       this.removeFromCart(item);
     }
   }
+
   // removeFromCart(id){
   //   let index = this.order.findIndex(item => item.id ==id);
   //   if (index!=-1) {
@@ -112,11 +114,39 @@ export class CheckoutComponent implements OnInit {
       this.subtotal += item.qty * item.menuItem.unitPrice;
     });
   }
-  //confirmOrder() {}
+  confirmOrder() {}
+  openModal() {
+    $('#myModal').modal('show');
+  }
 
-  openPopup() {
-    this.popup.open(PopupComponent, {
-      width: '400px',
-    });
+  AddOrder(){
+    //Adding to cart table
+    this.nMeal.userMobile=localStorage.getItem("id")!;
+    this.nMeal.chefId=this.menuService.orders[0].menuItem.chefId;
+    this.nMeal.location=this.AddressInfoForm.value.floor +' '+this.AddressInfoForm.value.AptNo+ ' '+
+    this.AddressInfoForm.value.BuildingName+' '+ this.AddressInfoForm.value.Street+' '+
+    this.AddressInfoForm.value.City;
+    this.nMeal.totalPrice=this.deliveryFee+this.subtotal;
+
+    //Adding to cart menu item table
+
+    console.log(this.nMeal);
+    this.checkoutService.addMeal(this.nMeal)
+      .subscribe(arg => {
+        console.log(arg);
+        $('#myModal').modal('hide');
+    for(let i=0;i<this.order.length;i++){
+      this.cartMenuItem.menuItemId=this.order[i].menuItem.id;
+      this.cartMenuItem.cartId=arg;
+      this.cartMenuItem.quantity=this.order[i].qty;
+      this.cartMenuItem.totalItemPrice=this.order[i].qty * this.order[i].menuItem.unitPrice;
+      this.checkoutService.addMealToCart(this.cartMenuItem).then(arg => {
+        console.log(arg);})      
+    }        
+      });  
+    
+  }
+  closeModal(){
+    $('#myModal').modal('hide');
   }
 }

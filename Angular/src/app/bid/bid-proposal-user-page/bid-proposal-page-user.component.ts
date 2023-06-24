@@ -72,6 +72,6 @@ export class BidProposalPageUserComponent {
                                               Proposal.ChefId,
                                               this.UserId)
     this.PostServices.AddAcceptedOrder(this.AcceptedOrder).subscribe(OrderId=>console.log(OrderId));
-    this.router.navigateByUrl(`cart`);
+    this.router.navigateByUrl(`home`);
   }
 }

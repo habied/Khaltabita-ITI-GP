@@ -10,7 +10,7 @@ export class FooterComponent {
  // message: string;
   constructor(private router: Router,private http: HttpClient) {}
 beachef(){
-  localStorage.setItem("title","Chef");
+  localStorage.setItem("registerAs","Chef");
   window.scrollTo(0, 0);
   this.router.navigate(['/login/Be_a_chef']);
 }
