@@ -76,7 +76,7 @@
         routerLink="cart"
         routerLinkActive="active"
         class="nav-item nav-link cart"
-        *ngIf="itemsNumber > 0 && !isChef"
+        *ngIf="itemsNumber > 0 && !isChef && isLoggedIn"
       >
         <i class="fas fa-shopping-cart" style="font-size: 1.5rem"></i>
         <div class="items-number">

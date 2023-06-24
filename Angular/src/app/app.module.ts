@@ -28,6 +28,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { TokenInterceptor } from './Interceptor/TokenInterceptor';
 import { PopupComponent } from './checkout/popup/popup.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { AboutUsComponent } from './core/about-us/about-us.component';
+import { ContactUsComponent } from './core/contact-us/contact-us.component';
 //import { ChefRegisterComponent } from './chef/chef-register/chef-register.component';
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
     PostsComponent,
     PopupComponent,
     UserOrdersComponent,
+    AboutUsComponent,
+    ContactUsComponent,
    // ChefRegisterComponent,
   ],
   imports: [
