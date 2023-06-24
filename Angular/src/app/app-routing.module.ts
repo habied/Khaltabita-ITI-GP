@@ -10,7 +10,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChefIndexComponent } from './chef/chef-index/chef-index.component';
 import { ChefProfileComponent } from './chef/chef-profile/chef-profile.component';
 import { PostsComponent } from './posts/posts.component';
-import { ChefOrdersComponent } from './chef/chef-orders/chef-orders.component';
+import {ChefOrdersComponent} from './chef-orders/chef-orders.component'
 import { ChefGuard } from './Guards/chef.guard';
 import { UserGuard } from './Guards/user.guard';
 import { AboutUsComponent } from './core/about-us/about-us.component';
@@ -27,8 +27,9 @@ const routes: Routes = [
   { path: 'AboutUS', component: AboutUsComponent },
   { path: 'ContactUs', component: ContactUsComponent },
   { path: 'chefs', component: ChefIndexComponent, pathMatch: 'full' },
-  { path: 'chefs/myorders', component: ChefOrdersComponent },  //, canActivate: [ChefGuard]
+ // { path: 'chefs/myorders', component: ChefOrdersComponent },  //, canActivate: [ChefGuard]
   { path: 'chefs/:id', component: ChefProfileComponent, pathMatch: 'full' },
+  {path : 'MyOrders', component: ChefOrdersComponent, pathMatch: 'full'},
   // {
   //   path: 'chefs',
   //   loadChildren: () => import('./chef/chef.module').then((m) => m.ChefModule),
