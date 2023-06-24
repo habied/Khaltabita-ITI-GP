@@ -10,7 +10,7 @@
     <div class="col-md-8">
       <div class="bg-dark d-flex align-items-center my-5">
         <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
-          <form [formGroup]="AddressInfoForm">
+          <form [formGroup]='AddressInfoForm'>
             <!-- <form novalidate [formGroup]="AddressInfoForm"> -->
             <div class="row g-3">
               <div class="col-md-12">
@@ -121,7 +121,7 @@
             <img class="img-fluid" [src]="item.menuItem.media" [alt]="item.menuItem.name" />
           </div>
           <div class="col-2">
-            <i class="fa fa-trash" aria-hidden="true" (click)="deleteItem()"></i>
+            <i class="fa fa-trash" aria-hidden="true" (click)="deleteItem(item)"></i>
           </div>
         </div>
       </section>

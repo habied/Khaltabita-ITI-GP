@@ -78,11 +78,19 @@ export class CheckoutComponent implements OnInit {
       this.calculateSubtotal();
     }
   }
-  deleteItem(){
-    // let index = this.order.findIndex(item => item.id ==id);
-    // if (index!=-1) {
-    //   this.order.splice(index,1);
-    // }
+  deleteItem(itemOrder: ItemOrder){
+    const index = this.menuService.orders.indexOf(itemOrder);
+    
+    // If the index is not -1 (i.e. itemOrder is in the orders array), remove the itemOrder from the orders array using splice()
+    if (index !== -1) {
+      this.menuService.orders.splice(index, 1);
+      
+      // Update the itemsNumber$ observable by subtracting the quantity of the removed itemOrder from the current value
+      this.menuService.itemsNumber$.next(this.menuService.itemsNumber$.getValue() - itemOrder.qty);
+      
+      // Update the ordersList property to reflect the updated contents of the orders array
+      this.order = this.menuService.orders.filter(order => order.menuItem.name !== itemOrder.menuItem.name);
+    }
   }
   calculateSubtotal() {
     this.subtotal = 0;
@@ -105,10 +113,8 @@ export class CheckoutComponent implements OnInit {
     this.nMeal.totalPrice=this.deliveryFee+this.subtotal;
 
     //Adding to cart menu item table
-
-    console.log(this.nMeal);
     this.checkoutService.addMeal(this.nMeal)
-      .subscribe(arg => {
+      .subscribe( arg => {
         console.log(arg);
         $('#myModal').modal('hide');
     for(let i=0;i<this.order.length;i++){
@@ -117,10 +123,11 @@ export class CheckoutComponent implements OnInit {
       this.cartMenuItem.quantity=this.order[i].qty;
       this.cartMenuItem.totalItemPrice=this.order[i].qty * this.order[i].menuItem.unitPrice;
       this.checkoutService.addMealToCart(this.cartMenuItem).then(arg => {
-        console.log(arg);})      
+        console.log(arg);})
     }        
       });  
-    
+      
+      
   }
   closeModal(){
     $('#myModal').modal('hide');

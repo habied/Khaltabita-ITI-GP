@@ -7,9 +7,7 @@ namespace DAL.Models;
 
 public class Cart
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; }
+    public int Id { get; set; }
 
     public string UserMobile { get; set; } = null!;
 
