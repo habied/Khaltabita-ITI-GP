@@ -28,6 +28,7 @@ namespace DAL.Repos.Carts
 
         public void AddCart(Cart cart)
         {
+            cart.Id=_context.Set<Cart>().OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefault()+1;
             _context.Set<Cart>().Add(cart);
         }
         public void AddCartMenuItem(CartMenuItem cartMenuItem)

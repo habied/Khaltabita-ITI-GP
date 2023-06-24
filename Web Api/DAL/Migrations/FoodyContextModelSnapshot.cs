@@ -373,7 +373,7 @@ namespace DAL.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("PostAcceptedOrder");
+                    b.ToTable("PostAcceptedOrder", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Models.Proposal", b =>
@@ -426,7 +426,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("UserLikingItId");
 
-                    b.ToTable("MenuItemUser");
+                    b.ToTable("MenuItemUser", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
