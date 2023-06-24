@@ -98,6 +98,7 @@ namespace BL.Managers
                         Description = post.Description,
                         FromPrice = post.FromPrice,
                         ToPrice = post.ToPrice,
+                        PrepTime=post.DeliveryDate,
                         QuantityUnit = post.QuantityUnit,
                         Quantity = post.Quantity,
                         Date = post.Date,
@@ -161,6 +162,7 @@ namespace BL.Managers
                         ToPrice = post.ToPrice,
                         QuantityUnit = post.QuantityUnit,
                         Quantity = post.Quantity,
+                        PrepTime=post.DeliveryDate,
                         Date = post.Date,
                         Username = post.User.Name,
                         UserAddress = post.User.Address

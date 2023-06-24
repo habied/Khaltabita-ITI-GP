@@ -68,16 +68,21 @@ export class CheckoutComponent implements OnInit {
 
   increaseItemQuantity(menuItemIndex: number) {
     ++this.order[menuItemIndex].qty;
-    this.menuService.itemsNumber$.next(this.order[menuItemIndex].qty);
+    this.menuService.itemsNumber$.next(this.menuService.itemsNumber$.value + 1);
     this.calculateSubtotal();
   }
-  decreaseItemQuantity(menuItemIndex: number) {
+  decreaseItemQuantity(menuItemIndex: number, item: ItemOrder) {
     if (this.order[menuItemIndex].qty - 1 > 0) {
       --this.order[menuItemIndex].qty;
-      this.menuService.itemsNumber$.next(this.order[menuItemIndex].qty);
+      this.menuService.itemsNumber$.next(
+        this.menuService.itemsNumber$.value - 1
+      );
       this.calculateSubtotal();
+    } else {
+      this.removeFromCart(item);
     }
   }
+
   deleteItem(itemOrder: ItemOrder){
     const index = this.menuService.orders.indexOf(itemOrder);
     
@@ -90,6 +95,7 @@ export class CheckoutComponent implements OnInit {
       
       // Update the ordersList property to reflect the updated contents of the orders array
       this.order = this.menuService.orders.filter(order => order.menuItem.name !== itemOrder.menuItem.name);
+
     }
   }
   calculateSubtotal() {

@@ -120,7 +120,7 @@
                           ></a>
                         </div>
                         <div
-                          *ngIf="userRole !== 'Chef' && userId"
+                          *ngIf="userRole !== 'Chef' && userId && routeChefId"
                           style="font-size: 1.25rem; color: var(--dark)"
                           class="like-button"
                           (click)="addLike($event, item.id)"

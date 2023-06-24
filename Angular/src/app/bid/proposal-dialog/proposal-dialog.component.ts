@@ -21,9 +21,10 @@ export class ProposalDialogComponent {
   static MinPrice:number=0;
   static MaxPrice:number=Infinity;
   ProposalForm: FormGroup = new FormGroup({TotalPrice: new FormControl("",[Validators.required,Validators.pattern('[0-9]*')]),
-    DeliveryTime: new FormControl("",[Validators.required,CustomizedValidators.futureDateValidator()]),
+    // DeliveryTime: new FormControl("",[Validators.required,CustomizedValidators.futureDateValidator()]),
     AdditionalInfo: new FormControl(),
-    ChooseImg: new FormControl()});
+    // ChooseImg: new FormControl()
+  });
 
   constructor(
     public PostService: PostService,

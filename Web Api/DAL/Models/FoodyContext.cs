@@ -106,6 +106,12 @@ public partial class FoodyContext : IdentityDbContext<AuthUser>
 
         });
 
+        modelBuilder.Entity<Chef>()
+                  .Ignore(e => e.Rating)
+                  .Property(e => e.Rating)
+                  .HasColumnName("rating")
+                  .HasComputedColumnSql("(dbo.GetAvgRatingValue(e.id)");
+
         modelBuilder.Entity<Feedback>(entity =>
         {
             

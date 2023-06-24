@@ -13,12 +13,13 @@ export class HeaderComponent implements OnInit {
   isChef = false;
 
   isClient = false;
-  chefId:any;
-  constructor(private menuService: MenuService,
+  chefId: any;
+  constructor(
+    private menuService: MenuService,
 
     private authService: AuthenService,
     private route: Router
-    ) {}
+  ) {}
   ngOnInit(): void {
     this.menuService.itemsNumber$.subscribe((itemsNumber) => {
       this.itemsNumber = itemsNumber;
@@ -26,11 +27,14 @@ export class HeaderComponent implements OnInit {
     this.checkIfUserLoggedIn();
     this.checkIfChefLoggedIn();
     this.checkIfClientLoggedIn();
-    this.chefId=localStorage.getItem('id');
-    this.authService.isAuth$.subscribe((value) => (this.isLoggedIn = value));
-    this.authService.isChef$.subscribe((value)=>(this.isChef=value));
-    this.authService.isUser$.subscribe((value)=>(this.isClient=value));
-
+    this.chefId = localStorage.getItem('id');
+    this.authService.isAuth$.subscribe((value) => {
+      this.isLoggedIn = value;
+      this.menuService.itemsNumber$.next(0);
+      this.menuService.orders = [];
+    });
+    this.authService.isChef$.subscribe((value) => (this.isChef = value));
+    this.authService.isUser$.subscribe((value) => (this.isClient = value));
   }
   itemsNumber: number = 0;
   logout() {
@@ -49,7 +53,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   checkIfClientLoggedIn() {
-    if (localStorage.getItem('title')=='NormalUser') {
+    if (localStorage.getItem('title') == 'NormalUser') {
       this.authService.isUser$.next(true);
     }
   }

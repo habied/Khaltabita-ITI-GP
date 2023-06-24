@@ -1,72 +1,84 @@
-<div class="container-fluid d-flex justify-content-center bg-white">
-  <div class="col-8 mx-auto">
-    <div class="row m-1 mt-0 gx-1">
-      <div class="card col-md-12 mt-5 mb-3">
-        <div class="card-body">
-          <div class="mb-4 mt-2">
-            <h5 class="card-title mb-0">{{Order?.UserName}}</h5>
-            <p class="card-text text-muted">{{Order?.UserAddress}}</p>
-          </div>
-          <div class="card-text">
-            <ul class="list-unstyled">
-            <li>Descripton: {{Order?.Description}}</li>
-            <li>Price: From {{Order?.FromPrice}} To {{Order?.ToPrice}}</li>
-            <li>Quantity: {{Order?.Quantity}}{{Order?.QuantityUnit}}</li>
-            <li>Preparation Time(min): {{Order?.PrepTime}}</li>
-          </ul>
-        </div>
-        <a class="btn btn-primary" (click)="AddProposal(Order?.FromPrice ?? 0,Order?.ToPrice?? 0)">Add Proposal</a>
-          <small class="text-muted  mx-2">Posted {{Order?.date}}</small>
-        </div>
+
+    <div class="container-fluid  justify-content-center bg-white">
+      <div class="col-8 mx-auto">
+
+          <div class="card col-md-12 m-4">
+            <div class="card-body">
+              <div class="mb-4 mt-2">
+                <h5 class="card-title mb-0">{{Order?.UserName}}</h5>
+                <p class="card-text text-muted">{{Order?.UserAddress}}</p>
+              </div>
+              <div class="card-text">
+                <ul class="list-unstyled">
+                <li>Descripton: {{Order?.Description}}</li>
+                <li>Price: From {{Order?.FromPrice}}EGP To {{Order?.ToPrice}}EGP</li>
+                <li>Quantity: {{Order?.Quantity}} {{Order?.QuantityUnit}}</li>
+                <li>Delivery Date: {{Order?.PrepTime}}</li>
+              </ul>
+            </div>
+            <a class="btn btn-primary" (click)="AddProposal(Order?.FromPrice ?? 0,Order?.ToPrice?? 0)">Add Proposal</a>
+                    <small class="text-muted  mx-2">Posted {{Order?.date}}</small>
+                </div>
       </div>
 
-<div class="d-flex">
-  <div class="table-active" *ngFor="let proposal of Order?.Proposals">
-    <div
-    class="card border-0 m-2 gx-1 shadow-sm zoom"
-    style="background-color: rgba(0, 0, 0, 0.05)"
-  >
-    <div class="d-flex align-items-center">
-        <img
-          [src]="proposal.chefPhoto"
-          class="rounded-circle me-3 m-3"
-          style="width: 70px; height:70px"
-          alt="Profile photo"
-        />
-      <div class="mb-4 mt-4 ml-2">
-        <h5 class="card-title mb-0">{{proposal.chefName}}</h5>
-        <div [style.width.px]="proposal.chefRating*15" class="crop">
-          <div style="width: 75px; font-size: small; cursor:text;">
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+
+      <div class="col-md-12 m-2 container">
+      <div class="row">
+      <div  *ngFor="let proposal of Order?.Proposals" class="card col-md-4 border-0 d-flex ">
+        <div class="card CardHeight border-0  shadow-sm zoom mb-2" style="background-color: rgba(0, 0, 0, 0.05);">
+
+        <!-- Chef Data -->
+        <div class="d-flex align-items-center">
+          <img
+            [src]="proposal.chefPhoto"
+            class="rounded-circle me-3 m-3"
+            style="width: 70px; height:70px"
+            alt="Profile photo"
+          />
+          <div class="mb-4 mt-4 ml-2">
+            <h5 class="card-title mb-0">{{proposal.chefName}}</h5>
+            <div [style.width.px]="proposal.chefRating*15" class="crop">
+              <div style="width: 75px; font-size: small; cursor:text;">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+            </div>
           </div>
+
+
+        </div>
+
+        <div class="card-body">
+          <div class="card-text">
+              <ul class="list-unstyled">
+                <li>Total Price: {{proposal.Price}}</li>
+                <li>Additional Info: {{proposal.Description}}</li>
+              </ul>
+          </div>
+          <div class="btn-group mt-3 d-flex align-items-center">
+            <button type="button" class="btn btn-sm btn-danger" (click)="DeleteProposal()">Delete</button>
+          </div><br>
+          <small class="text-muted mt-0">Posted {{proposal.datePosted}}</small>
+        </div>
+
         </div>
       </div>
-    </div>
-    <div class="card-body">
-      <div class="card-text">
-          <ul class="list-unstyled">
-            <li>Total Price: {{proposal.Price}}</li>
-            <!-- <li>Delivery Time: {{proposal.PrepTimeMin}}</li> -->
-            <li>Additional Info: {{proposal.Description}}</li>
-          </ul>
       </div>
-      <img
-        src="https://via.placeholder.com/350x150"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="btn-group mt-3 d-flex align-items-center">
-        <button type="button" class="btn btn-sm btn-danger" (click)="DeleteProposal()">Delete</button>
-      </div><br>
-      <small class="text-muted mt-0">Posted {{proposal.datePosted}}</small>
     </div>
-  </div>
-  </div>
-</div>
-</div>
-</div>
+
+
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
 
