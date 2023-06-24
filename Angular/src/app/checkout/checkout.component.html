@@ -123,7 +123,14 @@
     <div class="col-md-4">
       <section class="container my-5 bg-dark text-light p-2">
         <div class="row p-2" *ngFor="let item of order; let i = index">
-          <div class="col-6">
+          <div class="col-4">
+            <img
+              class="img-fluid"
+              [src]="item.menuItem.media"
+              [alt]="item.menuItem.name"
+            />
+          </div>
+          <div class="col-8">
             <div class="row">
               <h4 class="ff-secondary text-start text-primary fw-normal">
                 {{ item.menuItem.name }}
@@ -136,7 +143,7 @@
               <div class="col-6">
                 <button
                   type="button"
-                  (click)="decreaseItemQuantity(i)"
+                  (click)="decreaseItemQuantity(i, item)"
                   class="text-primary count"
                 >
                   <i class="fa fa-minus" aria-hidden="true"></i>
@@ -152,12 +159,10 @@
               </div>
             </div>
           </div>
-          <div class="col-4">
-            <img class="img-fluid" [src]="item.menuItem.media" [alt]="item.menuItem.name" />
-          </div>
-          <div class="col-2">
+
+          <!-- <div class="col-2">
             <i class="fa fa-trash text-primary" aria-hidden="true" (click)="removeFromCart(item)"></i>
-          </div>
+          </div> -->
         </div>
       </section>
       <section class="container my-5 bg-dark text-light p-2">
@@ -191,8 +196,11 @@
               Add items
             </button>
             <!-- [disabled]="AddressInfoForm.invalid" -->
-            <button class="btn btn-primary p-3 m-3" type="submit" (click)="openPopup()">
-
+            <button
+              class="btn btn-primary p-3 m-3"
+              type="submit"
+              (click)="openPopup()"
+            >
               Checkout
             </button>
           </div>
