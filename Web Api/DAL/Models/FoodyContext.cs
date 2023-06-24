@@ -58,9 +58,6 @@ public partial class FoodyContext : IdentityDbContext<AuthUser>
                 .HasMaxLength(20)
                 .HasColumnName("user_mobile");
 
-            //entity.HasOne(d => d.PostAcceptedOrder).WithMany(p => p.PostAcceptedOrder)
-            //    .HasForeignKey(d => d.ProposalId)
-            //    .HasConstraintName("FK_Cart_Proposal");
 
             entity.HasOne(d => d.UserMobileNavigation).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserMobile)

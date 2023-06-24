@@ -14,14 +14,14 @@ namespace Web_Api.Controllers
     {
         private readonly ICartManager _cartManager;
         private readonly IChefManager _chefManager;
-        public CartsController(ICartManager cartManager,IChefManager chefManager) 
+        public CartsController(ICartManager cartManager, IChefManager chefManager)
         {
             _cartManager = cartManager;
             _chefManager = chefManager;
         }
         // GET: api/Carts
         [HttpGet]
-        public ActionResult<List<CartReadDto>>  GetAll() 
+        public ActionResult<List<CartReadDto>> GetAll()
         {
             return _cartManager.GetAllCarts().ToList(); //200
         }
@@ -32,7 +32,7 @@ namespace Web_Api.Controllers
         public ActionResult<CartReadDto> GetCartById(int id)
         {
             CartReadDto? cartRead = _cartManager.GetCartById(id);
-            if (cartRead==null)
+            if (cartRead == null)
             {
                 return NotFound();
             }
@@ -53,9 +53,9 @@ namespace Web_Api.Controllers
         //POST: api/Carts/Menu
         [HttpPost]
         [Route("Menu")]
-        public ActionResult AddCartMenuItem(CartMenuItem cartMenuItem)
+        public ActionResult AddCartMenuItem(CartMenuAddDto menuAddDto)
         {
-            _cartManager.AddCartMenuItem(cartMenuItem);
+            _cartManager.AddCartMenuItem(menuAddDto);
             return NoContent();
         }
 
@@ -75,8 +75,8 @@ namespace Web_Api.Controllers
         [Route("chefcarts/{chefid}")]
         public ActionResult<List<CartReadDto>> GetChefCarts(string chefid)
         {
-            ChefReadDto? chef=_chefManager.GetChef(chefid);
-            if(chef is null)return NotFound();
+            ChefReadDto? chef = _chefManager.GetChef(chefid);
+            if (chef is null) return NotFound();
             return _cartManager.GetChefCarts(chefid);
         }
     }

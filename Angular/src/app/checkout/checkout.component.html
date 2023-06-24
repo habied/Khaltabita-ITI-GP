@@ -79,42 +79,7 @@
                   <label for="City">City</label>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div
-                  class="form-floating"
-                  id="phonenumber"
-                  data-target-input="nearest"
-                >
-                  <input
-                    type="text"
-                    formControlName="phonenumber"
-                    class="form-control datetimepicker-input"
-                    id="phonenumber"
-                    placeholder="Phone number"
-                    data-target="#date3"
-                    data-toggle="datetimepicker"
-                  />
-                  <label for="phonenumber">Phone number</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div
-                  class="form-floating"
-                  id="phonenumber"
-                  data-target-input="nearest"
-                >
-                  <input
-                    type="text"
-                    formControlName="MobileHome"
-                    class="form-control datetimepicker-input"
-                    id="MobileHome"
-                    placeholder="Mobile home (optional)"
-                    data-target="#date3"
-                    data-toggle="datetimepicker"
-                  />
-                  <label for="MobileHome">Mobile home (optional)</label>
-                </div>
-              </div>
+              
             </div>
           </form>
         </div>
@@ -156,7 +121,7 @@
             <img class="img-fluid" [src]="item.menuItem.media" [alt]="item.menuItem.name" />
           </div>
           <div class="col-2">
-            <i class="fa fa-trash text-primary" aria-hidden="true" (click)="removeFromCart(item)"></i>
+            <i class="fa fa-trash" aria-hidden="true" (click)="deleteItem()"></i>
           </div>
         </div>
       </section>
@@ -191,7 +156,7 @@
               Add items
             </button>
             <!-- [disabled]="AddressInfoForm.invalid" -->
-            <button class="btn btn-primary p-3 m-3" type="submit" (click)="openPopup()">
+            <button class="btn btn-primary p-3 m-3" type="submit" (click)="openModal()">
 
               Checkout
             </button>
@@ -200,4 +165,49 @@
       </section>
     </div>
   </div>
+
+  <!-- Modal -->
+  
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Confirmation
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          If you clicked CONFIRM, you will not be able to cancel the order! 
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary bg-dark close-btn"
+            data-bs-dismiss="modal"
+            (click)="AddOrder()"
+          >
+            Confirm
+          </button>
+          <button type="button" class="btn btn-primary" (click)="closeModal()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
 </div>
+
+
