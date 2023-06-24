@@ -73,7 +73,7 @@ namespace Web_Api.Controllers
         }
         [HttpDelete]
         [Route("DeleteLike/{userid}/{menuitemid}")]
-        public ActionResult DeleteMenuItem(string userid, int menuitemid)
+        public ActionResult DeleteMenuItemLike(string userid, int menuitemid)
         {
             bool success = _manager.DeleteItemLikeByUser(userid, menuitemid);
             if (success) { return Ok(); }
