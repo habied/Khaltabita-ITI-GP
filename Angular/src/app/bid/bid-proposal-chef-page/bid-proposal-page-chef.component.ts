@@ -14,9 +14,11 @@ export class BidProposalPageChefComponent {
   Proposals:Proposal[]=[];
   Order:PostOrder | undefined;
   PostId:Number;
+  LoggedChefID:string|undefined;
 
   constructor(public PostServices:PostService,public ac:ActivatedRoute){
-    this.PostId=this.ac.snapshot.params["id"]
+    this.LoggedChefID=localStorage.getItem('id')!;
+    this.PostId=this.ac.snapshot.params["id"];
     this.PostServices.GetPost(this.PostId).subscribe(response => {
 
       this.Order=new PostOrder(this.PostId,
@@ -52,9 +54,13 @@ export class BidProposalPageChefComponent {
   }
 
   AddProposal(MinPrice:number,MaxPrice:number) {
+    
     this.PostServices.OpenProposalDialog(MinPrice,MaxPrice,this.PostId);
   }
-  DeleteProposal(){
-
+  DeleteProposal(ID:Number){
+    this.PostServices.DeleteProposal(ID).subscribe(Response=>{
+      location.reload();
+      console.log(Response);
+    })
   }
 }

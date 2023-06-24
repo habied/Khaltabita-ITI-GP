@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Proposal } from 'src/app/_models/Post_Order_Item/Proposal';
 import { ProposalPostDto } from 'src/app/_models/Post_Order_Item/ProposalPostDto';
 import {CustomizedValidators} from 'src/app/CustomizedValidators/Customized-validators';
@@ -29,7 +29,8 @@ export class ProposalDialogComponent {
   constructor(
     public PostService: PostService,
     public ProposalDialogRef: MatDialogRef<ProposalDialogComponent>,
-    public ac:ActivatedRoute
+    public ac:ActivatedRoute,
+    public router:Router
   ) {
     this.ChefId=localStorage.getItem("id")!;
   }
@@ -41,10 +42,9 @@ export class ProposalDialogComponent {
         this.ProposalForm.value.TotalPrice,
         this.ProposalForm.value.AdditionalInfo,
         ProposalDialogComponent.PostID!,
-        this.ChefId!,
-        )
+        this.ChefId!)
       this.PostService.AddProposal(this.NewProposal);
-    this.CloseDialog();
+      this.CloseDialog();
   }
   CloseDialog() {
     this.ProposalDialogRef.close();

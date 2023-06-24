@@ -58,8 +58,8 @@
                 <li>Additional Info: {{proposal.Description}}</li>
               </ul>
           </div>
-          <div class="btn-group mt-3 d-flex align-items-center">
-            <button type="button" class="btn btn-sm btn-danger" (click)="DeleteProposal()">Delete</button>
+          <div class="btn-group mt-3 d-flex align-items-center" *ngIf="proposal.ChefId==LoggedChefID">
+            <button type="button" class="btn btn-sm btn-danger" (click)="DeleteProposal(proposal.Id)">Delete</button>
           </div><br>
           <small class="text-muted mt-0">Posted {{proposal.datePosted}}</small>
         </div>
