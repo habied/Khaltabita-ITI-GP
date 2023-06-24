@@ -3,6 +3,7 @@ using BL.Dtos.Chefs;
 using BL.Dtos.Menu;
 using DAL.Models;
 using DAL.Repos.Carts;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace BL.Managers.Carts
     public class CartManager : ICartManager
     {
         private ICartRepo _repo;
-        public CartManager(ICartRepo cartRepo) 
+        public CartManager(ICartRepo cartRepo)
         {
-             _repo = cartRepo ;
+            _repo = cartRepo;
         }
         public int AddCart(CartAddDto cartDto)
         {
@@ -25,17 +26,25 @@ namespace BL.Managers.Carts
                 UserMobile = cartDto.UserMobile,
                 Location = cartDto.Location,
                 TotalPrice = cartDto.TotalPrice,
-                DeliveryDate= DateTime.Now.AddHours(1),
-                OrderDate=DateTime.Now,
-                ChefId= cartDto.ChefId,
+                DeliveryDate = DateTime.Now.AddHours(1),
+                OrderDate = DateTime.Now,
+                ChefId = cartDto.ChefId,
             };
-            _repo.AddCart(cart); 
+            _repo.AddCart(cart);
             _repo.SaveChanges();
             return cart.Id;
         }
-        public void AddCartMenuItem(CartMenuItem cartMenuItem)
+        public void AddCartMenuItem(CartMenuAddDto menuAddDto)
         {
-            _repo.AddCartMenuItem(cartMenuItem);
+            CartMenuItem item = new CartMenuItem
+            {
+                CartId = menuAddDto.CartId,
+                MenuItemId = menuAddDto.MenuItemId,
+                TotalItemPrice = menuAddDto.TotalItemPrice,
+                Quantity = menuAddDto.Quantity,
+            };
+
+            _repo.AddCartMenuItem(item);
             _repo.SaveChanges();
         }
 
@@ -48,7 +57,7 @@ namespace BL.Managers.Carts
                 UserMobile = c.UserMobile,
                 Location = c.Location,
                 TotalPrice = c.TotalPrice,
-                ChefId= c.ChefId,
+                ChefId = c.ChefId,
 
             }).ToList();
         }
@@ -64,7 +73,7 @@ namespace BL.Managers.Carts
                     UserMobile = cart.UserMobile,
                     Location = cart.Location,
                     TotalPrice = cart.TotalPrice,
-                    ChefId= cart.ChefId,
+                    ChefId = cart.ChefId,
                 };
             }
             return null;
@@ -76,11 +85,11 @@ namespace BL.Managers.Carts
             {
                 _repo.SaveChanges();
             }
-            return deleted; 
+            return deleted;
         }
         public List<CartReadDto> GetChefCarts(string chefId)
         {
-            List<Cart>carts=_repo.GetChefCarts(chefId);
+            List<Cart> carts = _repo.GetChefCarts(chefId);
             return carts.Select(cart => new CartReadDto
             {
                 Id = cart.Id,

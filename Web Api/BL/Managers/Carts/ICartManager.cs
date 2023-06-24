@@ -14,7 +14,7 @@ namespace BL.Managers.Carts
         public List<CartReadDto> GetAllCarts();
         CartReadDto? GetCartById(int id);
         public int AddCart(CartAddDto cartDto);
-        public void AddCartMenuItem(CartMenuItem cartMenuItem);
+        public void AddCartMenuItem(CartMenuAddDto cartMenuItem);
         public Boolean DeleteCart(int id);
         public List<CartReadDto> GetChefCarts(string chefId);
     }
