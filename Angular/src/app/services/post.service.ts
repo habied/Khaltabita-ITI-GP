@@ -37,7 +37,9 @@ export class PostService  {
     OrderItem: new FormControl("",[Validators.required,Validators.pattern('[a-zA-Z\u0600-\u06FF\s]*')]),
     PrepTime: new FormControl("",[Validators.required,CustomizedValidators.futureDateValidator()]),
     // PrepTimeUnit: new FormControl("",[Validators.required]),
-    Quantity: new FormControl("",[Validators.required,Validators.pattern('[0-9]*')]),
+    Quantity: new FormControl("",[Validators.required,
+      // Validators.pattern('[0-9]*')
+    ]),
     QuantityUnit: new FormControl("",[Validators.required]),
     // ChooseFile: new FormControl('')
   });
