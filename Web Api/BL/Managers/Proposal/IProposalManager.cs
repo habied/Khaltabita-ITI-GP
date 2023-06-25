@@ -9,5 +9,6 @@ namespace BL.Managers.Proposal
     public interface IProposalManager
     {
         int AddProposal(ProposalAddDto NewProposal);
+        void DeleteProposal(int id);
     }
 }

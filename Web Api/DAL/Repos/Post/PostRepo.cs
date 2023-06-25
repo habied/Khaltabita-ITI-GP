@@ -22,6 +22,22 @@ namespace DAL
                                       .OrderByDescending(x => x.Id)
                                       .Select(x => x.Id)
                                       .FirstOrDefault() + 1;
+            Cart NewCart = new Cart();
+            NewCart.PostAcceptedOrderId = NewAcceptedPost.Id;
+            NewCart.OrderDate = DateTime.Now;
+            NewCart.DeliveryDate = NewAcceptedPost.DeliveryDate.Date;
+            NewCart.UserMobile = NewAcceptedPost.UserId;
+            NewCart.TotalPrice = NewAcceptedPost.FinalPrice;
+            NewCart.ChefId = NewAcceptedPost.ChefId;
+            NewCart.Id = _foodyContext.Set<Cart>()
+                                      .OrderByDescending(x => x.Id)
+                                      .Select(x => x.Id)
+                                      .FirstOrDefault() + 1;
+            string Location = _foodyContext.Set<User>().Where(x => x.Id == NewAcceptedPost.UserId)
+                                    .Select(x => x.Address)
+                                    .FirstOrDefault();
+            NewCart.Location = Location;
+            _foodyContext.Set<Cart>().Add(NewCart);
             _foodyContext.Set<PostAcceptedOrder>().Add(NewAcceptedPost);
 
         }

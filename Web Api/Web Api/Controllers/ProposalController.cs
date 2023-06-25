@@ -20,6 +20,12 @@ namespace Web_Api.Controllers
             int NewId=_proposalManager.AddProposal(NewProposal);
             return Ok(NewId);
         }
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProposal(int id)
+        {
+            _proposalManager.DeleteProposal(id);
+            return Ok();
+        }
 
     }
 }

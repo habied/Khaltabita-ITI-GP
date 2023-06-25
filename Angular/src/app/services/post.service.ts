@@ -2,7 +2,6 @@ import { Injectable, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {
   FormGroup,
   FormControl,
-  FormBuilder,
   Validators
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -26,8 +25,6 @@ export class PostService  {
   PostBaseUrl:string="https://localhost:7157/api/Post/";
   ProposalBaseUrl:string="https://localhost:7157/api/Proposal/";
   NewPostOrder: AddPostDto | undefined;
-  // PostDetails: PostOrder=new PostOrder();
-  // Proposals:Proposal[]=[];
   AddedPostID:Number=-1;
 
 
@@ -76,6 +73,8 @@ export class PostService  {
 
   AddProposal(NewProposal:ProposalPostDto){
     this.http.post<number>(this.ProposalBaseUrl,NewProposal).subscribe(response => {
+      // this.router.navigateByUrl(`specialorder/proposal/${ProposalDialogComponent.PostID}`);
+      location.reload();
       console.log('Response from server:', response);});
   }
 
@@ -93,7 +92,9 @@ export class PostService  {
     GetUserPosts(UserID:string){
       return this.http.get<any>(`${this.PostBaseUrl}UserPosts/${UserID}`);
     }
-
+    DeleteProposal(ID:Number){
+      return this.http.delete<any>(`${this.ProposalBaseUrl}${ID}`,);
+    }
   }
 
 

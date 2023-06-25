@@ -44,6 +44,7 @@ public partial class FoodyContext : IdentityDbContext<AuthUser>
             entity.ToTable("Cart");
 
             entity.Property(e => e.Id)
+            .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.DeliveryDate)
                 .HasColumnType("datetime")
@@ -52,7 +53,6 @@ public partial class FoodyContext : IdentityDbContext<AuthUser>
             entity.Property(e => e.OrderDate)
                 .HasColumnType("datetime")
                 .HasColumnName("order_date");
-            //entity.Property(e => e.PostAcceptedOrder).HasColumnName("PostAcceptedOrder");
             entity.Property(e => e.TotalPrice).HasColumnName("total_price");
             entity.Property(e => e.UserMobile)
                 .HasMaxLength(20)
