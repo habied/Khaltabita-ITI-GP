@@ -1,4 +1,6 @@
 ﻿using DAL.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,5 +53,19 @@ namespace DAL.Repos.Carts
         {
             return _context.SaveChanges();
         }
+
+        public string GetCartItemNames(int cartId)
+        {
+            //var query = @"
+            //DECLARE @itemNames VARCHAR(MAX);
+            //EXEC @itemNames = [dbo].[GetCartItemNames] @cartId;
+            //SELECT @itemNames as ItemNames;";
+
+            //var itemNames = _context.Set<string>().FromSqlRaw(query, new SqlParameter("@cartId", cartId)).FirstOrDefault();
+
+            return "";
+        }
+
+        
     }
 }

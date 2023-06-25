@@ -30,6 +30,7 @@ import { PopupComponent } from './checkout/popup/popup.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AboutUsComponent } from './core/about-us/about-us.component';
 import { ContactUsComponent } from './core/contact-us/contact-us.component';
+import { ChefOrdersComponent } from './chef-orders/chef-orders.component';
 //import { ChefRegisterComponent } from './chef/chef-register/chef-register.component';
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ContactUsComponent } from './core/contact-us/contact-us.component';
     UserOrdersComponent,
     AboutUsComponent,
     ContactUsComponent,
+    ChefOrdersComponent,
    // ChefRegisterComponent,
   ],
   imports: [

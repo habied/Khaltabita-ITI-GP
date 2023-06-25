@@ -16,5 +16,7 @@ export class PostOrder {
               public UserAddress:string="",
               public date?:Date,
               public Proposals:Proposal[]=[],
-              ){}
+              ){
+                
+              }
   }

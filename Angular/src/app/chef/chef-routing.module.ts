@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChefIndexComponent } from './chef-index/chef-index.component';
 import { ChefProfileComponent } from './chef-profile/chef-profile.component';
-import { ChefOrdersComponent } from './chef-orders/chef-orders.component';
+
 
 
 const routes: Routes = [

@@ -1,0 +1,25 @@
+<!-- " -->
+<div  *ngFor="let Order of orders">
+    <div class="container-fluid d-flex justify-content-center bg-white">
+      <div class="col-8 mx-auto">
+        <div class="row m-1 mt-0 gx-1">
+          <div class="card col-md-12 mt-5 mb-3">
+            <div class="card-body">
+              <div class="mb-4 mt-0">
+                <h5 class="card-title mb-0">{{Order.username}}</h5>
+                <p class="card-text text-muted">{{Order.userAddress}}</p>
+              </div>
+              <div class="card-text">
+                <ul class="list-unstyled">
+                <li>Descripton: {{Order.description}}</li>
+                <li>Price:  {{Order.Price}} </li>
+                <li>Location: {{Order.address}}</li>
+                <li>Delivery Date: {{Order.date}}</li>
+              </ul>
+            </div>
+            <a class="btn btn-primary" (click)="Done()">Done</a>
+             
+            </div>
+          </div>
+    </div>
+    

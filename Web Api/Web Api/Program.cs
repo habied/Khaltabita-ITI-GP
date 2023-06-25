@@ -69,6 +69,7 @@ namespace Web_Api
             builder.Services.AddScoped<IProposalManager, ProposalManager>();
             builder.Services.AddScoped<ICartRepo, CartRepo>();
             builder.Services.AddScoped<ICartManager, CartManager>();
+            builder.Services.AddScoped<IOrderManger, OrderManger>();
             #endregion
 
 

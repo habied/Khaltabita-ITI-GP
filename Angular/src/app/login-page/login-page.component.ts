@@ -37,8 +37,16 @@ constructor(private formBuilder:FormBuilder,private authService: AuthenService, 
       this.authService.login(credentials).subscribe((token) => {
         // console.log(token);
         this.Id=token.id;
-        this.authService.isAuth$.subscribe((value) => (this.isLoggedIn = value));
-        this.route.navigateByUrl("/home");
+        this.authService.isAuth$.subscribe(
+          value => {
+            this.isLoggedIn = value;
+            if (value) {
+              this.route.navigateByUrl('/home');
+            } else {
+             // alert('Login failed: Invalid credentials');
+            }
+          }
+        );
 
       });
     

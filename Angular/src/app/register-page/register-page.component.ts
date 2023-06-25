@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnChanges, SimpleChanges } from '@angular/core';
 import { RegisterDTO} from '../_models/Auth/RegisterDTO';
 import {RegisterService } from 'src/app/services/register.service';
 import { HttpClient } from '@angular/common/http';
@@ -15,13 +15,16 @@ import { SimplestDialogComponent } from '../dialogs/simplest-dialog/simplest-dia
 })
 
 
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent implements OnInit , OnChanges {
   
   user = new RegisterDTO('', '', '', '', '', '','','');
-  
+  formIsValid: boolean = false;
   showSection: boolean = false;
  
   constructor(private dialogService: DialogsService,private registerService: RegisterService,public http:HttpClient , private route:Router) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.registerEnable();
+  }
   //#region to know whether it's user or chef 
   ngOnInit(): void {
     if ( localStorage.getItem("registerAs")=="Chef")
@@ -52,7 +55,12 @@ export class RegisterPageComponent implements OnInit {
     {
       console.log("User from register");
       this.registerService.registerUser(this.user).subscribe(response => {
-        console.log(response);
+        
+        this.returnToLogin();
+      },
+      error => {
+        alert('Registration failed Your Email Or Mobile is not Unique' );
+      
       });
     }
     else if ( localStorage.getItem("registerAs") == "Chef")
@@ -60,17 +68,21 @@ export class RegisterPageComponent implements OnInit {
       console.log("Chef from register");
      this.registerChef(); 
     }
-    this.returnToLogin();
+    
   }
 
 
   registerChef() {
-
     console.log(this.user);
-
-    this.registerService.registerChef(this.user).subscribe(response => {
-      console.log(response);
-    });
+    this.registerService.registerChef(this.user).subscribe(response => 
+       {
+       
+       this.returnToLogin();
+       },
+      error => {
+        alert('Registration failed Your Email Or Mobile is not Unique');
+      }
+    );
   }
   //#endregion
 
@@ -87,6 +99,7 @@ export class RegisterPageComponent implements OnInit {
       this.user.media = (response as any).url; // cast the 'response' object to 'any' type and retrieve the 'url' property using bracket notation
       console.log(this.user.media); // log the URL to the console
       // use the 'imageUrl' variable to store or display the image URL as needed
+    
     });
   }
   }
@@ -95,8 +108,6 @@ export class RegisterPageComponent implements OnInit {
   //#region redirect to loginpage
 returnToLogin()
 {
-  
-  //this.dialogService.showMessage('Hello, world!', 'Greeting');
   
   this.route.navigate(['/login']);
 }
@@ -127,5 +138,23 @@ returnToLogin()
     const phoneNumberRegex = /^\d{11}$/;
     return phoneNumberRegex.test(phoneNumber);
   }
+  //#endregion
+
+  //#region Enable The Register BUTTON 
+  registerEnable():boolean{
+   return this.isValidEmail(this.user.email) && this.isValidPassword(this.user.password) &&
+  
+      this.isValidConfirmPassword(this.user.password,this.user.confirmPassword)
+      &&
+      this.isValidPhoneNumber(this.user.mobile)
+      &&
+      this.user.address != null
+      &&
+      this.user.gender != null 
+      && 
+      this.user.name !=null;
+      
+  }
+ 
   //#endregion
 }

@@ -60,7 +60,6 @@ public class ChefManager : IChefManager
             ChefName = d.Name,
             ChefAddress = d.Address,
             ChefId = d.Id,
-            //ChefRating = d.Rating,
             ChefPhoto = d.Media,
         }).ToList();
     }
