@@ -42,5 +42,6 @@ export class AuthenService {
     console.log("removed");
     this.isAuth$.next(false);
     this.isChef$.next(false);
+    this.isUser$.next(false);
   }
 }

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ChefOrdersService {
-  baseurl:string="https://localhost:7157/api/Orders/"
+  baseurl:string="https://localhost:7157/api/Order/"
   getAll(id:string){
     return this.http.get<orders[]>(this.baseurl+id)
   }

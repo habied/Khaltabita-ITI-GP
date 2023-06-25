@@ -1,5 +1,5 @@
-<!-- *ngFor="let Order of number" -->
-<div  >
+<!-- " -->
+<div  *ngFor="let Order of orders">
     <div class="container-fluid d-flex justify-content-center bg-white">
       <div class="col-8 mx-auto">
         <div class="row m-1 mt-0 gx-1">
@@ -12,13 +12,13 @@
               <div class="card-text">
                 <ul class="list-unstyled">
                 <li>Descripton: {{Order.description}}</li>
-                <li>Price: From {{Order.Price}} </li>
-                <li>Quantity: {{Order.quantity}}</li>
-                <li>Delivery Date: {{Order.prepTime}}</li>
+                <li>Price:  {{Order.Price}} </li>
+                <li>Location: {{Order.address}}</li>
+                <li>Delivery Date: {{Order.date}}</li>
               </ul>
             </div>
             <a class="btn btn-primary" (click)="Done()">Done</a>
-              <small class="text-muted  mx-2">Posted {{Order.date}}</small>
+             
             </div>
           </div>
     </div>

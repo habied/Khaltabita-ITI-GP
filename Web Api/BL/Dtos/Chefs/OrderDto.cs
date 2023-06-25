@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL.Dtos;
+namespace BL;
 
 public class OrderDto
 {
-    public string username { get; set; } = null!;
-    public string userAddress { get; set; } = null!;
-    public string description { get; set; } = null!;
-    public string Price { get; set; } = null!;
-    public string quantity { get; set; } = null!;
-    public string prepTime { get; set; } = null!;
-    public string address { get; set; } = null!;
-    public string date { get; set; } = null!;
+    public int? Id { get; set; }
+    public string? username { get; set; } = null!;
+    public string? description { get; set; } = null!;
+    public int? Price { get; set; } = 0;
+    public string? quantity { get; set; } = null!;
+    public string? address { get; set; } = null!;
+    public DateTime? date { get; set; } = null!;
 
     
 }

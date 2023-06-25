@@ -1,12 +1,12 @@
 export class orders{
     constructor(
-        public username:string,
+        public id:string,
+        public username:string,//mobile
         public userAddress:string ,
         public description:string ,
         public Price:string,
         public quantity:string ,
-        public prepTime: string,
-        public address:string ,
-        public date:string,
+        public address:string ,//done
+        public date:string,//done
         ){}
   }

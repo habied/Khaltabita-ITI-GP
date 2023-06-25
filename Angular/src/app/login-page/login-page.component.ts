@@ -43,7 +43,7 @@ constructor(private formBuilder:FormBuilder,private authService: AuthenService, 
             if (value) {
               this.route.navigateByUrl('/home');
             } else {
-              alert('Login failed: Invalid credentials');
+             // alert('Login failed: Invalid credentials');
             }
           }
         );

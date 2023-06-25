@@ -10,9 +10,9 @@ namespace BL;
 
     public interface IOrderManger
     {
-    public Task<List<OrderDto>> GetAllOrders( string Chefid);
+    public List<OrderDto> GetAllOrders( string Chefid);
   
-    public Boolean DeleteOrder(int Cartid);
+    public bool DeleteOrder(int Cartid);
     
 }
 
