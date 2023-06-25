@@ -25,7 +25,7 @@ namespace DAL
             Cart NewCart = new Cart();
             NewCart.PostAcceptedOrderId = NewAcceptedPost.Id;
             NewCart.OrderDate = DateTime.Now;
-            NewCart.DeliveryDate = NewAcceptedPost.DeliveryDate.Date;
+            NewCart.DeliveryDate = DateTime.Now;
             NewCart.UserMobile = NewAcceptedPost.UserId;
             NewCart.TotalPrice = NewAcceptedPost.FinalPrice;
             NewCart.ChefId = NewAcceptedPost.ChefId;
