@@ -79,7 +79,7 @@ export class CheckoutComponent implements OnInit {
       );
       this.calculateSubtotal();
     } else {
-      this.removeFromCart(item);
+      // this.removeFromCart(item);
     }
   }
 
