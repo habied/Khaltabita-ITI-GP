@@ -125,8 +125,17 @@ export class CheckoutComponent implements OnInit {
       this.checkoutService.addMealToCart(this.cartMenuItem).then(arg => {
         console.log(arg);})
     }        
-      });  
-      
+      },
+      (error: any) => {
+        // Handle errors, if any
+        console.error(error);
+      },
+      () => 
+      { console.log('Observable completed');
+        this.order=[];
+        this.subtotal=0;
+        this.menuService.itemsNumber$.next(0); 
+      });
       
   }
   closeModal(){
