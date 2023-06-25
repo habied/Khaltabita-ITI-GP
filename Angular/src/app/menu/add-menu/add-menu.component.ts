@@ -35,9 +35,9 @@ export class AddMenuComponent implements OnInit {
       chefId: '',
       name: [
         '',
-        [Validators.required, Validators.pattern('[A-Za-zء-ي_ ,]{3,}')],
+        [Validators.required, Validators.pattern('[A-Za-zء-ي_ , ، ]{3,}')],
       ],
-      description: ['', [Validators.pattern('[A-Za-zء-ي _ ,]{3,200}')]],
+      description: ['', [Validators.pattern('[A-Za-zء-ي _ , ، ]{3,200}')]],
       unitPrice: [
         '10',
         [Validators.required, Validators.min(10), Validators.max(5000)],
