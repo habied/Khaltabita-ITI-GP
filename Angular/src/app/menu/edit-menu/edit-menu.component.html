@@ -66,11 +66,19 @@
         </div>
 
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="pImg" class="form-label">Product Image</label>
           <input type="file" >
         <img [src]="imageUrl"/>
+      -->
+
+        <!-- <div class="mb-3"> -->
+          <label for="pImg" class="form-label">Product Image</label>
+          <span style="display: inline-block;width:90px;overflow: hidden;"><input type="file" (change)="ChangePhoto($event)" id='pImg'></span>{{imgName}}
+        <div style="width: 200px;"><img [src]="imageUrl" style="max-width: 100%;"/></div>
      
+       <!-- </div> -->
+
 
              <!-- <div class="form-group col-sm-12 col-md-4">
               <label for="">Product Image<label class="red-text"></label></label>
@@ -79,7 +87,7 @@
                  >
               </div>
             </div> -->
-          </div>
+          <!-- </div> -->
   
             <span class="d-flex w-100 pl-2 pt-2">
                <button [disabled]="editMenuItemFrm?.invalid" type="submit" class="btn btn-success">Submit</button>

@@ -11,7 +11,12 @@ import { TopChefsComponent } from './top-chefs/top-chefs.component';
 
 //import { RegisterPageComponent } from '../register-page/register-page.component';
 @NgModule({
-  declarations: [ChefProfileComponent, ChefIndexComponent,RatingComponent, TopChefsComponent],
+
+ // declarations: [ChefProfileComponent, ChefIndexComponent,RatingComponent, TopChefsComponent],
+
+  declarations: [ChefProfileComponent, ChefIndexComponent,RatingComponent,
+     TopChefsComponent, ChefOrdersComponent],
+
   imports: [CommonModule, ChefRoutingModule, FormsModule,
      MenuModule,BrowserAnimationsModule],
   exports: [ChefIndexComponent,TopChefsComponent],
