@@ -10,7 +10,7 @@
     <div class="col-md-8">
       <div class="bg-dark d-flex align-items-center my-5">
         <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
-          <form [formGroup]='AddressInfoForm'>
+          <form [formGroup]="AddressInfoForm">
             <!-- <form novalidate [formGroup]="AddressInfoForm"> -->
             <div class="row g-3">
               <div class="col-md-12">
@@ -79,7 +79,6 @@
                   <label for="City">City</label>
                 </div>
               </div>
-              
             </div>
           </form>
         </div>
@@ -125,13 +124,12 @@
             </div>
           </div>
 
-          <div class="col-4">
+          <!-- <div class="col-4">
             <img class="img-fluid" [src]="item.menuItem.media" [alt]="item.menuItem.name" />
           </div>
           <div class="col-2">
             <i class="fa fa-trash" aria-hidden="true" (click)="deleteItem(item)"></i>
-          </div>
-
+          </div> -->
         </div>
       </section>
       <section class="container my-5 bg-dark text-light p-2">
@@ -165,7 +163,11 @@
               Add items
             </button>
             <!-- [disabled]="AddressInfoForm.invalid" -->
-            <button class="btn btn-primary p-3 m-3" type="submit" (click)="openModal()">
+            <button
+              class="btn btn-primary p-3 m-3"
+              type="submit"
+              (click)="openModal()"
+            >
               Checkout
             </button>
           </div>
@@ -175,7 +177,7 @@
   </div>
 
   <!-- Modal -->
-  
+
   <div
     class="modal fade"
     id="myModal"
@@ -186,9 +188,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            Confirmation
-          </h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
           <button
             type="button"
             class="btn-close"
@@ -197,7 +197,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          If you clicked CONFIRM, you will not be able to cancel the order! 
+          If you clicked CONFIRM, you will not be able to cancel the order!
         </div>
         <div class="modal-footer">
           <button
@@ -217,5 +217,3 @@
   </div>
   <!-- Modal -->
 </div>
-
-

@@ -6,6 +6,7 @@ import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { AddMenuComponent } from './add-menu/add-menu.component';
 import { ChefGuard } from '../Guards/chef.guard';
 import { SameChefGuard } from '../Guards/same-chef.guard';
+import { UserGuard } from '../Guards/user.guard';
 const routes: Routes = [
   { path: '', component: MenuDetailsComponent },
   { path: ':chefid', component: MenuDetailsComponent },
@@ -19,7 +20,11 @@ const routes: Routes = [
     component: AddMenuComponent,
     canActivate: [ChefGuard, SameChefGuard],
   },
-  { path: ':chefid/:itemid', component: MenuItemComponent },
+  {
+    path: ':chefid/:itemid',
+    component: MenuItemComponent,
+    canActivate: [UserGuard],
+  },
 ];
 
 @NgModule({
