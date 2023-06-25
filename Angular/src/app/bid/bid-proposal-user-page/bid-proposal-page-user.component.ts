@@ -1,5 +1,5 @@
 import { Component,OnChanges,OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Proposal } from 'src/app/_models/Post_Order_Item/Proposal';
 import { PostAcceptedOrder } from 'src/app/_models/Post_Order_Item/post-accepted-order';
 import { PostOrder } from 'src/app/_models/Post_Order_Item/post-order';
@@ -17,8 +17,10 @@ export class BidProposalPageUserComponent {
   UserId:string | undefined;
   AcceptedOrder:PostAcceptedOrder | undefined;
   DeliveryDate:string|undefined;
+  f=Intl.DateTimeFormat("en-us",{dateStyle:'medium',timeStyle:'short'})
 
-  constructor(public PostServices:PostService, public ac:ActivatedRoute){
+
+  constructor(public PostServices:PostService, public ac:ActivatedRoute, public router:Router){
     this.PostId=this.ac.snapshot.params["id"];
     this.UserId=localStorage.getItem("id")!;
   this.PostServices.GetPost(this.PostId).subscribe(response => {
@@ -50,9 +52,9 @@ export class BidProposalPageUserComponent {
         response['proposalsDto'][i].chefPhoto,
       ))
     }
+    this.DeliveryDate=this.f.format(response['postReadDto'].prepTime);
     console.log('Response from server:', response)
-    // const f=Intl.DateTimeFormat("en-us",{dateStyle:'medium',timeStyle:'short'})
-    // this.DeliveryDate=f.format(this.Order?.date);
+
 
   })}
 
@@ -69,6 +71,7 @@ export class BidProposalPageUserComponent {
                                               Proposal.Id,
                                               Proposal.ChefId,
                                               this.UserId)
-    this.PostServices.AddAcceptedOrder(this.AcceptedOrder).subscribe(OrderId=>console.log(OrderId))
+    this.PostServices.AddAcceptedOrder(this.AcceptedOrder).subscribe(OrderId=>console.log(OrderId));
+    this.router.navigateByUrl(`home`);
   }
 }

@@ -4,7 +4,7 @@
   <a href="" class="navbar-brand p-0">
     <h1
       class=" ff-secondary text-start text-primary fw-normal"
-     
+
     >
       <i class="fa fa-utensils me-3 "></i>Khaltabita
     </h1>
@@ -39,8 +39,8 @@
       >
 
       <a
-        *ngIf="isChef"
-        routerLink="posts"
+        *ngIf="isLoggedIn"
+        routerLink="allposts"
         routerLinkActive="active"
         class="nav-item nav-link"
         >Posts</a
@@ -76,7 +76,7 @@
         routerLink="cart"
         routerLinkActive="active"
         class="nav-item nav-link cart"
-        *ngIf="itemsNumber > 0 && !isChef"
+        *ngIf="itemsNumber > 0 && !isChef && isLoggedIn"
       >
         <i class="fas fa-shopping-cart" style="font-size: 1.5rem"></i>
         <div class="items-number">
