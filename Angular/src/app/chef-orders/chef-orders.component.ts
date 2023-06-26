@@ -19,7 +19,13 @@ export class ChefOrdersComponent implements OnInit {
     });
   }
 
-  Done(): void {
+
+
+  Done( id: number): void {
+    this.chefOrderService.delete(id).subscribe((response: any) => {
+      console.log(response);
+    });
+    location.reload();
     // Define the 'Done' function here
   }
 }
