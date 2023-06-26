@@ -11,7 +11,7 @@ export class ChefOrdersService {
     return this.http.get<orders[]>(this.baseurl+id)
   }
   
-  delete(id:string){ //could be id of the cart 
+  delete(id:number){ //could be id of the cart 
     return this.http.delete(this.baseurl+id);
   }
  
