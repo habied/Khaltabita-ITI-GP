@@ -100,9 +100,10 @@
 <div class="mb-3">
      <label for="pImg" class="form-label">Product Image</label>
      <input type="file" (change)="uploadPhoto($event)">
-   <img [src]="imageUrl"/>
-
+     <div style="width: 200px;"><img [src]="imageUrl" style="max-width: 100%;"/></div>
+  
   </div>
+  
    <button [disabled]="addMenuItemFrm.invalid" type="submit" class="btn btn-success">Submit</button>
    <button class="btn btn-danger m-3" type="button" (click)="resetForm()">Reset</button>
    <button class="btn btn-primary m-3" type="button"(click)="onBack()" style="float: right;">Back</button> 
