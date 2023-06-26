@@ -15,7 +15,7 @@ namespace BL;
 public class OrderManger : IOrderManger
 {
     private readonly ICartRepo _repo;
-    string? des = null;
+    string? description = null;
     string? Qty = null;
     public OrderManger(ICartRepo cartRepo)
     {
@@ -34,11 +34,13 @@ public class OrderManger : IOrderManger
     public List<OrderDto> GetAllOrders(string  ChefId)
     {
         List<Cart> cart = _repo.GetChefCarts(ChefId);
-        
+
         //int? postId = cart.Select(p => p.PostAcceptedOrderId).FirstOrDefault();
         //if (postId == null)
         //{
-           
+       
+
+
         //}
         //else
         //{
@@ -54,8 +56,9 @@ public class OrderManger : IOrderManger
             Id = c.Id,
             address = c.Location,
             // Price = c.TotalPrice,
-            username=c.UserMobile,
+            username = c.UserMobile,
             description = _repo.GetCartItemNames(c.Id),
+
             date =c.DeliveryDate,
         }).ToList();
 
