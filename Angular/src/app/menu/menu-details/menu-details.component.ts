@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenueItem } from 'src/app/_models/menu/MenueItem';
 import { AuthenService } from 'src/app/services/authen.service';
 import { MenuService } from 'src/app/services/menu.service';
-import { toArray } from 'rxjs/operators';
+
 @Component({
   selector: 'app-menu-details',
   templateUrl: './menu-details.component.html',
@@ -15,7 +15,9 @@ export class MenuDetailsComponent implements OnInit {
     public menuService: MenuService,
     private route: ActivatedRoute,
     private authService: AuthenService
-  ) {}
+  ) {
+    this.inputValue = '';
+  }
   ngOnInit(): void {
     myfun(false);
     //checking if there's logged in user
@@ -36,6 +38,9 @@ export class MenuDetailsComponent implements OnInit {
           .getChefItems(this.routeChefId)
           .subscribe((menuItems) => {
             this.menuItems = menuItems;
+            this.menuItems.forEach((item) =>
+              this.viewedMenuItems.push({ ...item })
+            );
             myfun(true);
           });
         //load liked chef items by user
@@ -44,22 +49,27 @@ export class MenuDetailsComponent implements OnInit {
             .getLikedChefMenuItemsByUser(this.userId, this.routeChefId)
             .subscribe((likedItemsIds) => {
               this.likedItemsIds = likedItemsIds;
-              console.log(this.likedItemsIds);
             });
         }
       } else {
         this.menuService.getAll().subscribe((menuItems) => {
           this.menuItems = menuItems;
+          this.menuItems.forEach((item) =>
+            this.viewedMenuItems.push({ ...item })
+          );
+          this.viewedMenuItems = menuItems;
           myfun(true);
         });
       }
     });
   }
   menuItems: MenueItem[] = [];
+  viewedMenuItems: MenueItem[] = [];
   routeChefId: string | null = null;
   userId: string | null = null;
   likeButtonColor: string = 'var(--dark)';
   likedItemsIds: number[] = [];
+  inputValue = '';
   categories = [
     { text: 'breakfast', icon: 'fa-coffee', description: 'Popular' },
     { text: 'dinner', icon: 'fa-hamburger', description: 'Special' },
@@ -100,6 +110,7 @@ export class MenuDetailsComponent implements OnInit {
           );
           this.likedItemsIds.splice(itemIdIndex, 1);
           this.menuItems.find((item) => item.id == itemId)!.likes -= 1;
+          this.viewedMenuItems.find((item) => item.id == itemId)!.likes -= 1;
         });
     }
     if (this.userId && !isLiked) {
@@ -108,10 +119,22 @@ export class MenuDetailsComponent implements OnInit {
         .subscribe(() => {
           this.likedItemsIds.push(itemId);
           this.menuItems.find((item) => item.id == itemId)!.likes += 1;
+          this.viewedMenuItems.find((item) => item.id == itemId)!.likes += 1;
         });
     }
   }
   isLiked(menuItemId: number) {
     return this.likedItemsIds.some((id) => id == menuItemId);
+  }
+  filterItems(value: string) {
+    console.log(value);
+    //this.inputValue = event.target.value;
+    if (value != '') {
+      this.viewedMenuItems = this.menuItems.filter((item) => {
+        return item.name.includes(value);
+      });
+    } else {
+      this.menuItems.forEach((item) => this.viewedMenuItems.push({ ...item }));
+    }
   }
 }

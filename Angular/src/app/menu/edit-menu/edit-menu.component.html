@@ -2,50 +2,83 @@
   <div class="row g-0">
     <div class="col-md-12 bg-dark d-flex align-items-center">
       <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
-        <h1 class="section-title ff-secondary text-start text-primary fw-normal">Edit MenuItem </h1>
+        <h1
+          class="section-title ff-secondary text-start text-primary fw-normal"
+        >
+          Edit MenuItem
+        </h1>
 
-        <form *ngIf="editMenuItemFrm?.get('name')" novalidate (ngSubmit)="saveProduct()"[formGroup]="editMenuItemFrm">
-        <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
-            <label for="">Product Name<label class="red-text">*</label></label>
-            <div class="input-group mb-2">
-              <input class="form-control"id="productNameId"type="text"
-              placeholder="Name (required)"formControlName="name">
+        <form
+          *ngIf="editMenuItemFrm?.get('name')"
+          novalidate
+          (ngSubmit)="saveProduct()"
+          [formGroup]="editMenuItemFrm"
+        >
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+              <label for=""
+                >Product Name<label class="red-text">*</label></label
+              >
+              <div class="input-group mb-2">
+                <input
+                  class="form-control"
+                  id="productNameId"
+                  type="text"
+                  placeholder="Name (required)"
+                  formControlName="name"
+                />
+              </div>
+            </div>
 
+            <div class="form-group col-sm-12 col-md-4">
+              <label for="">Price<label class="red-text">*</label></label>
+              <div class="input-group mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="priceId"
+                  name="Price"
+                  formControlName="unitPrice"
+                  placeholder="Price (required)"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12 col-md-4">
+              <label for=""
+                >Preparation Time<label class="red-text"></label
+              ></label>
+              <div class="input-group mb-2">
+                <input
+                  class="form-control"
+                  id="prepTimeId"
+                  name="PrepTime"
+                  formControlName="prepTime"
+                  placeholder="Preparation Time"
+                />
+              </div>
             </div>
           </div>
 
           <div class="form-group col-sm-12 col-md-4">
-            <label for="">Price<label class="red-text">*</label></label>
+            <label for=""
+              >Product Category<label class="red-text">*</label></label
+            >
             <div class="input-group mb-2">
-              <input type="text" class="form-control" id="priceId" name="Price" formControlName="unitPrice"
-                placeholder="Price (required)">
+              <select
+                class="form-control"
+                formControlName="category"
+                id="categoryId"
+                name="category"
+              >
+                <option value="breakfast">BreakFast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+              </select>
             </div>
           </div>
 
-          <div class="form-group col-sm-12 col-md-4">
-            <label for="">Preparation Time<label class="red-text"></label></label>
-            <div class="input-group mb-2">
-              <input class="form-control" id="prepTimeId" name="PrepTime" formControlName="prepTime"
-                placeholder="Preparation Time">
-            </div>
-          </div>
-        </div>
-
-          
-        <div class="form-group col-sm-12 col-md-4">
-          <label for="">Product Category<label class="red-text">*</label></label>
-          <div class="input-group mb-2">
-            <select class="form-control" formControlName="category" id="categoryId" name="category"  >
-             
-              <option value="breakfast">BreakFast</option> 
-              <option value="lunch">Lunch</option> 
-              <option value="dinner">Dinner</option> 
-            </select>
-          </div>
-        </div>
-  
-        <!-- <div class="form-group col-sm-12 col-md-4">
+          <!-- <div class="form-group col-sm-12 col-md-4">
           <label for="">Description<label class="red-text"></label></label>
           <div class="input-group mb-2">
             <textarea class="form-control"  placeholder="Description" formControlName="Description" name="description"
@@ -53,34 +86,42 @@
           </div>
         </div> -->
 
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="descriptionId"
+              >Description</label
+            >
 
-
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label"for="descriptionId">Description</label>
-                 
-          <div class="col-md-8">
-            <textarea class="form-control"  id="descriptionId"placeholder="Description"  rows=3
-            formControlName="description">
-            </textarea>
+            <div class="col-md-8">
+              <textarea
+                class="form-control"
+                id="descriptionId"
+                placeholder="Description"
+                rows="3"
+                formControlName="description"
+              >
+              </textarea>
+            </div>
           </div>
-        </div>
 
-
-        <!-- <div class="mb-3">
+          <!-- <div class="mb-3">
           <label for="pImg" class="form-label">Product Image</label>
           <input type="file" >
         <img [src]="imageUrl"/>
       -->
 
-        <!-- <div class="mb-3"> -->
+          <!-- <div class="mb-3"> -->
           <label for="pImg" class="form-label">Product Image</label>
-          <span style="display: inline-block;width:90px;overflow: hidden;"><input type="file" (change)="ChangePhoto($event)" id='pImg'></span>{{imgName}}
-        <div style="width: 200px;"><img [src]="imageUrl" style="max-width: 100%;"/></div>
-     
-       <!-- </div> -->
+          <span style="display: inline-block; width: 100px; overflow: hidden"
+            ><input type="file" (change)="ChangePhoto($event)" id="pImg"
+          /></span>
+          <span> {{ imgName }}</span>
+          <div style="width: 200px">
+            <img [src]="imageUrl" style="max-width: 100%" />
+          </div>
 
+          <!-- </div> -->
 
-             <!-- <div class="form-group col-sm-12 col-md-4">
+          <!-- <div class="form-group col-sm-12 col-md-4">
               <label for="">Product Image<label class="red-text"></label></label>
               <div class="input-group mb-2">
                 <input type="file" class="form-control" id="imgId" name="address" formControlName="media"
@@ -88,20 +129,37 @@
               </div>
             </div> -->
           <!-- </div> -->
-  
-            <span class="d-flex w-100 pl-2 pt-2">
-               <button [disabled]="editMenuItemFrm?.invalid" type="submit" class="btn btn-success">Submit</button>
-                
-                <button class="btn btn-danger m-2" style="width:80px;" type="button" title="Delete this product"
-                (click)="deleteProduct()"> Reset
-              </button>
-             
-              <button class="btn btn-primary " style="margin-left: auto; "type="button"(click)="Back()" >Back</button> 
-            </span>
-    
-      </form>
 
+          <span class="d-flex w-100 pl-2 pt-2">
+            <button
+              [disabled]="editMenuItemFrm?.invalid"
+              type="submit"
+              class="btn btn-success"
+            >
+              Submit
+            </button>
+
+            <button
+              class="btn btn-danger m-2"
+              style="width: 80px"
+              type="button"
+              title="Delete this product"
+              (click)="deleteProduct()"
+            >
+              Reset
+            </button>
+
+            <button
+              class="btn btn-primary"
+              style="margin-left: auto"
+              type="button"
+              (click)="Back()"
+            >
+              Back
+            </button>
+          </span>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>

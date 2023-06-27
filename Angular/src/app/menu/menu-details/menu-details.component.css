@@ -12,3 +12,8 @@
     text-align: center;
   }
 }
+input:focus {
+  border-color: var(--primary);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.5);
+}
