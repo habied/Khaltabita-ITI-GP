@@ -29,5 +29,11 @@ namespace BL
             _proposalRepo.SaveChanges();
             return NewProposal.Id;
         }
+
+        public void DeleteProposal(int id)
+        {
+            _proposalRepo.DeleteProposal(id);
+            _proposalRepo.SaveChanges();
+        }
     }
 }

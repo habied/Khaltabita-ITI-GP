@@ -54,6 +54,15 @@
           >
             New +
           </button>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search Item"
+            *ngIf="userRole !== 'Chef'"
+            style="width: 300px"
+            (ngModelChange)="filterItems($event)"
+            [(ngModel)]="inputValue"
+          />
         </div>
         <div
           class="tab-content"
@@ -65,7 +74,7 @@
             [ngClass]="i + 1 == 1 ? 'active' : ''"
           >
             <div class="row g-4">
-              <ng-container *ngFor="let item of menuItems">
+              <ng-container *ngFor="let item of viewedMenuItems">
                 <div
                   class="col-lg-6 menu-item"
                   *ngIf="item.category == category.text"

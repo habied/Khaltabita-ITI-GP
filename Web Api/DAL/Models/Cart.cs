@@ -22,6 +22,7 @@ public class Cart
     public int? PostAcceptedOrderId { get; set; }
 
     public string ChefId { get; set; } = null!;
+
     public virtual Chef? Chef { get; set; }
 
     public virtual ICollection<CartMenuItem> CartMenuItems { get; set; } = new List<CartMenuItem>();

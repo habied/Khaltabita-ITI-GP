@@ -15,14 +15,14 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private menuService: MenuService,
-    private checkoutService: CheckoutService,
+    private checkoutService: CheckoutService
   ) {}
-  
+
   ngOnInit(): void {
     this.order = [...this.menuService.orders];
     this.calculateSubtotal();
     this.chefId = this.order[0]?.menuItem.chefId;
-    
+
     this.AddressInfoForm = this.fb.group({
       BuildingName: [
         '',
@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('[A-Za-zء-ي_ ,]{3,}')],
       ],
-      City: [ 
+      City: [
         '',
         [Validators.required, Validators.pattern('[A-Za-zء-ي_ ,]{3,}')],
       ],
@@ -63,8 +63,8 @@ export class CheckoutComponent implements OnInit {
   subtotal: number = 0;
   chefId: string = '';
   finalOrder: Checkout | null = null;
-  nMeal:Checkout=new Checkout();
-  cartMenuItem:any={};
+  nMeal: Checkout = new Checkout();
+  cartMenuItem: any = {};
 
   increaseItemQuantity(menuItemIndex: number) {
     ++this.order[menuItemIndex].qty;
@@ -79,23 +79,31 @@ export class CheckoutComponent implements OnInit {
       );
       this.calculateSubtotal();
     } else {
-      // this.removeFromCart(item);
+
+
+    //  this.removeFromCart(item);
+
+      this.deleteItem(item);
+
     }
   }
 
-  deleteItem(itemOrder: ItemOrder){
+  deleteItem(itemOrder: ItemOrder) {
     const index = this.menuService.orders.indexOf(itemOrder);
-    
+
     // If the index is not -1 (i.e. itemOrder is in the orders array), remove the itemOrder from the orders array using splice()
     if (index !== -1) {
       this.menuService.orders.splice(index, 1);
-      
-      // Update the itemsNumber$ observable by subtracting the quantity of the removed itemOrder from the current value
-      this.menuService.itemsNumber$.next(this.menuService.itemsNumber$.getValue() - itemOrder.qty);
-      
-      // Update the ordersList property to reflect the updated contents of the orders array
-      this.order = this.menuService.orders.filter(order => order.menuItem.name !== itemOrder.menuItem.name);
 
+      // Update the itemsNumber$ observable by subtracting the quantity of the removed itemOrder from the current value
+      this.menuService.itemsNumber$.next(
+        this.menuService.itemsNumber$.getValue() - itemOrder.qty
+      );
+
+      // Update the ordersList property to reflect the updated contents of the orders array
+      this.order = this.menuService.orders.filter(
+        (order) => order.menuItem.name !== itemOrder.menuItem.name
+      );
     }
   }
   calculateSubtotal() {
@@ -109,42 +117,51 @@ export class CheckoutComponent implements OnInit {
     $('#myModal').modal('show');
   }
 
-  AddOrder(){
+  AddOrder() {
     //Adding to cart table
-    this.nMeal.userMobile=localStorage.getItem("id")!;
-    this.nMeal.chefId=this.menuService.orders[0].menuItem.chefId;
-    this.nMeal.location=this.AddressInfoForm.value.floor +' '+this.AddressInfoForm.value.AptNo+ ' '+
-    this.AddressInfoForm.value.BuildingName+' '+ this.AddressInfoForm.value.Street+' '+
-    this.AddressInfoForm.value.City;
-    this.nMeal.totalPrice=this.deliveryFee+this.subtotal;
+    this.nMeal.userMobile = localStorage.getItem('id')!;
+    this.nMeal.chefId = this.menuService.orders[0].menuItem.chefId;
+    this.nMeal.location =
+      this.AddressInfoForm.value.floor +
+      ' ' +
+      this.AddressInfoForm.value.AptNo +
+      ' ' +
+      this.AddressInfoForm.value.BuildingName +
+      ' ' +
+      this.AddressInfoForm.value.Street +
+      ' ' +
+      this.AddressInfoForm.value.City;
+    this.nMeal.totalPrice = this.deliveryFee + this.subtotal;
 
     //Adding to cart menu item table
-    this.checkoutService.addMeal(this.nMeal)
-      .subscribe( arg => {
+    this.checkoutService.addMeal(this.nMeal).subscribe(
+      (arg) => {
         console.log(arg);
         $('#myModal').modal('hide');
-    for(let i=0;i<this.order.length;i++){
-      this.cartMenuItem.menuItemId=this.order[i].menuItem.id;
-      this.cartMenuItem.cartId=arg;
-      this.cartMenuItem.quantity=this.order[i].qty;
-      this.cartMenuItem.totalItemPrice=this.order[i].qty * this.order[i].menuItem.unitPrice;
-      this.checkoutService.addMealToCart(this.cartMenuItem).then(arg => {
-        console.log(arg);})
-    }        
+        for (let i = 0; i < this.order.length; i++) {
+          this.cartMenuItem.menuItemId = this.order[i].menuItem.id;
+          this.cartMenuItem.cartId = arg;
+          this.cartMenuItem.quantity = this.order[i].qty;
+          this.cartMenuItem.totalItemPrice =
+            this.order[i].qty * this.order[i].menuItem.unitPrice;
+          this.checkoutService.addMealToCart(this.cartMenuItem).then((arg) => {
+            console.log(arg);
+          });
+        }
       },
       (error: any) => {
         // Handle errors, if any
         console.error(error);
       },
-      () => 
-      { console.log('Observable completed');
-        this.order=[];
-        this.subtotal=0;
-        this.menuService.itemsNumber$.next(0); 
-      });
-      
+      () => {
+        console.log('Observable completed');
+        this.order = [];
+        this.subtotal = 0;
+        this.menuService.itemsNumber$.next(0);
+      }
+    );
   }
-  closeModal(){
+  closeModal() {
     $('#myModal').modal('hide');
   }
 }

@@ -16,6 +16,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using static DAL.Repos.Carts.CartRepo;
 
 namespace Web_Api
 {
@@ -52,6 +53,10 @@ namespace Web_Api
             builder.Services.AddDbContext<FoodyContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            var ArabicConnectionString = builder.Configuration.GetConnectionString("Arabic-ConnectionString");
+            builder.Services.AddDbContext<MyDbContext>(options =>
+                options.UseSqlServer(ArabicConnectionString)); 
+
             builder.Services.AddIdentity<AuthUser, IdentityRole>()
                     .AddEntityFrameworkStores<FoodyContext>()
                     .AddDefaultTokenProviders();
@@ -69,6 +74,7 @@ namespace Web_Api
             builder.Services.AddScoped<IProposalManager, ProposalManager>();
             builder.Services.AddScoped<ICartRepo, CartRepo>();
             builder.Services.AddScoped<ICartManager, CartManager>();
+            builder.Services.AddScoped<IOrderManger, OrderManger>();
             #endregion
 
 

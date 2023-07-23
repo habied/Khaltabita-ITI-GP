@@ -26,7 +26,7 @@ namespace BL.Managers
                 FinalPrice = AcceptedOrder.FinalPrice,
                 QuantityUnit = AcceptedOrder.QuantityUnit,
                 Quantity = AcceptedOrder.Quantity,
-                DeliveryDate = AcceptedOrder.PreparationTime_min,
+                DeliveryDate = AcceptedOrder.PrepTime,
                 AdditionalInfo = AcceptedOrder.AdditionalInfo,
                 PostId = AcceptedOrder.PostId,
                 ProposalId = AcceptedOrder.ProposalId,

@@ -15,8 +15,11 @@ namespace DAL.Repos.Carts
         public void AddCart(Cart cart);
         public void AddCartMenuItem(CartMenuItem cartMenuItem);
 
-        public Boolean DeleteCart(int id);
+        public bool DeleteCart(int id);
         public List<Cart> GetChefCarts(string chefId);
+
+        public string GetCartItemNames(int cartId);
+
         int SaveChanges();
     }
 }

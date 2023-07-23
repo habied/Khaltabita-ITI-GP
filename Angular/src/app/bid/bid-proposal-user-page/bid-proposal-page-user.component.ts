@@ -59,18 +59,18 @@ export class BidProposalPageUserComponent {
   })}
 
   AcceptProposal(Proposal:Proposal){
-    console.log(Proposal.ChefId);
     this.AcceptedOrder=new PostAcceptedOrder(
                                               this.Order?.Description,
                                               Proposal.Price,
                                               this.Order?.QuantityUnit,
                                               this.Order?.Quantity,
-                                              this.Order?.PrepTime ?? new Date(),
+                                              this.Order?.PrepTime!,
                                               Proposal.Description,
                                               this.Order?.PostID,
                                               Proposal.Id,
                                               Proposal.ChefId,
                                               this.UserId)
+    console.log(this.AcceptedOrder);
     this.PostServices.AddAcceptedOrder(this.AcceptedOrder).subscribe(OrderId=>console.log(OrderId));
     this.router.navigateByUrl(`home`);
   }
